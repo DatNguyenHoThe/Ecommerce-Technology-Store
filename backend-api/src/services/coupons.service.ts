@@ -80,7 +80,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "coupon not found");
     }
     // kiểm tra xem code tồn tại không
-    const couponExist = await Coupon.findOne({code: payload.code});
+    const couponExist = await Coupon.findOne({
+        code: payload.code,
+        _id: { $ne: id }
+    });
     if(couponExist) {
         throw createError(404, "coupon already exists");
     }

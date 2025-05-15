@@ -77,7 +77,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "setting not found");
     }
     // kiểm tra xem key tồn tại không
-    const settingExist = await Setting.findOne({key: payload.key});
+    const settingExist = await Setting.findOne({
+        key: payload.key,
+        _id: { $ne: id }
+    });
     if(settingExist) {
         throw createError(404, "setting already exists");
     }

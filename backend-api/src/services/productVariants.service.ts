@@ -81,7 +81,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "productVariant not found");
     }
     // kiểm tra xem sku tồn tại không
-    const productVariantExist = await ProductVariant.findOne({sku: payload.sku});
+    const productVariantExist = await ProductVariant.findOne({
+        sku: payload.sku,
+        _id: { $ne: id }
+    });
     if(productVariantExist) {
         throw createError(404, "productVariant already exists");
     }

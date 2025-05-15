@@ -84,7 +84,10 @@ const updateById = async(id: string, payload: IBrand) => {
     //Kiểm tra xem id có tồn tại không
     const brand = await getById(id);
     //Kiểm tra xem tên brand đã tồn tại chưa
-    const brandNameExist = await Brand.findOne({brand_name: payload.brand_name});
+    const brandNameExist = await Brand.findOne({
+        brand_name: payload.brand_name,
+        _id: { $ne: id }
+    });
     if(brandNameExist) {
         throw createError(404, 'Brand Name already exists');
     }
@@ -94,6 +97,10 @@ const updateById = async(id: string, payload: IBrand) => {
     }
     // trộn dữ liệu mới và cũ
     Object.assign(brand, payload);
+
+    // Lưu thay đổi vào database
+    await brand.save();
+
     return brand;
 }
 

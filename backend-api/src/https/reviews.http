@@ -1,7 +1,7 @@
 ### GET ALL
-GET http://localhost:8889/api/v1/reviews
+GET http://localhost:8889/api/v1/reviews?productId=68075346c03069f384176c8c
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0YzVmMDI1MTYwYjIyNGY0MTFlNjEiLCJlbWFpbCI6Im5ndXllbmhvdGhlZGF0QGdtYWlsLmNvbSIsImlhdCI6MTc0NDA5NDc0NywiZXhwIjoxNzQ0MTgxMTQ3fQ.oXb0IY9Bx2LTR9NrzWnbyrEJ4w1PMGYAlZf5EeFVuF0
+
 
 ### get by id
 GET http://localhost:8889/api/v1/reviews/67e25c33a31721c7dab94277

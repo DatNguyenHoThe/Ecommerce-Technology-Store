@@ -147,7 +147,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "category not found");
     }
     // kiểm tra xem category_name tồn tại không
-    const categoryExist = await Category.findOne({category_name: payload.category_name});
+    const categoryExist = await Category.findOne({
+        category_name: payload.category_name,
+        _id: { $ne: id } // loại trừ sản phẩm hiện tại
+    });
     if(categoryExist) {
         throw createError(404, "category already exists");
     }

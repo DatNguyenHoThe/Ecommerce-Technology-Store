@@ -1,5 +1,6 @@
 import Review from '../models/review.model';
 import createError from 'http-errors';
+import { Types } from "mongoose";
 
 
 
@@ -16,8 +17,13 @@ const getAll = async(query: any) => {
     //tìm kiếm theo điều kiện
     let where = {};
     // nếu có tìm kiếm theo tên review
-    if(query.title && query.title.length > 0) {
+    if(query.title && query.title.length > 0 ) {
         where = {...where, title: {$regex: query.title, $options: 'i'}};
+    }
+
+    //lọc theo productId nếu có
+    if(query.productId && Types.ObjectId.isValid(query.productId)) {
+        where = {...where, product: Types.ObjectId.createFromHexString(query.productId)};
     }
 
     const reviews = await Review

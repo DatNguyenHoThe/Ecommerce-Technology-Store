@@ -84,7 +84,10 @@ const updateById = async(id: string, payload: any) => {
     const user = await getById(id);
 
     //kiểm tra xem email có tồn tại không
-    const emailExist = await User.findOne({email: payload.email});
+    const emailExist = await User.findOne({
+        email: payload.email,
+        _id: { $ne: id }
+    });
     if(emailExist) {
         throw createError(400, 'Email already exists');
     }

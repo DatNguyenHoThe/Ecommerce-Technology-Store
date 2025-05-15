@@ -79,7 +79,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "location not found");
     }
     // kiểm tra xem location_name tồn tại không
-    const locationExist = await Location.findOne({name: payload.name});
+    const locationExist = await Location.findOne({
+        name: payload.name,
+        _id: { $ne: id }
+    });
     if(locationExist) {
         throw createError(404, "location already exists");
     }

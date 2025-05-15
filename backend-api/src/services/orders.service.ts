@@ -104,7 +104,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "order not found");
     }
     // kiểm tra xem orderNumber tồn tại không
-    const orderExist = await Order.findOne({orderNumber: payload.orderNumber});
+    const orderExist = await Order.findOne({
+        orderNumber: payload.orderNumber,
+        _id: { $ne: id }
+    });
     if(orderExist) {
         throw createError(404, "orderNumber already exists");
     }

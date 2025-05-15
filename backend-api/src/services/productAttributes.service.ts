@@ -79,7 +79,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "productAttribute not found");
     }
     // kiểm tra xem name tồn tại không
-    const productAttributeExist = await ProductAttribute.findOne({name: payload.name});
+    const productAttributeExist = await ProductAttribute.findOne({
+        name: payload.name,
+        _id: { $ne: id }
+    });
     if(productAttributeExist) {
         throw createError(404, "productAttribute already exists");
     }

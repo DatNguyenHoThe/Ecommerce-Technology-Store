@@ -1,5 +1,4 @@
 import TechNew from '../models/techNew.model';
-import { buildSlug } from '../helpers/slugify.helper';
 import { ITechNew } from '../types/type';
 import createError from 'http-errors';
 
@@ -75,12 +74,21 @@ const updateById = async(id: string, payload: ITechNew) => {
     //Kiểm tra xem id có tồn tại không
     const techNew = await getById(id);
     //Kiểm tra xem tile đã tồn tại chưa
-    const techNewExists = await TechNew.findOne({title: payload.title});
-    if(techNewExists) {
-        throw createError(404, 'Technology new already exists');
+    if (payload.title && payload.title !== techNew.title) {
+        const techNewExists = await TechNew.findOne({
+        title: payload.title,
+        _id: { $ne: id }
+        });
+        if(techNewExists) {
+           throw createError(404, 'Technology new already exists');
+        }
     }
     // trộn dữ liệu mới và cũ
     Object.assign(techNew, payload);
+
+    // Lưu thay đổi vào database
+    await techNew.save();
+    
     return techNew;
 }
 

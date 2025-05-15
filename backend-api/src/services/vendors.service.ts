@@ -84,7 +84,10 @@ const updateById = async(id: string, payload: any) => {
         throw createError(404, "vendor not found");
     }
     // kiểm tra xem tên của vendor tồn tại không
-    const vendorExist = await Vendor.findOne({companyName: payload.companyName});
+    const vendorExist = await Vendor.findOne({
+        companyName: payload.companyName,
+        _id: { $ne: id }
+    });
     if(vendorExist) {
         throw createError(404, "vendor already exists");
     }
