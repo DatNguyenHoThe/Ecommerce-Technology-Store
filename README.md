@@ -3,7 +3,7 @@
 Ecommerce Technology Store là một dự án website bán hàng công nghệ, bao gồm hệ thống quản lý sản phẩm, người dùng, và đơn hàng. Dự án được tổ chức thành ba phần chính:
 
 * **backend-api** (Node.js): API backend, xử lý logic và giao tiếp với database.
-* **frontend-api** (Next.js): Giao diện người dùng, hiển thị sản phẩm và trang thanh toán.
+* **frontend** (Next.js): Giao diện người dùng, hiển thị sản phẩm và trang thanh toán.
 * **react-admin** (Express + Node.js): Trang quản trị để quản lý sản phẩm, đơn hàng, và người dùng.
 
 ## 📂 Cấu trúc thư mục
