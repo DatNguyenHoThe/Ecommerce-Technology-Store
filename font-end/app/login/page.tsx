@@ -15,37 +15,76 @@ export default function LoginpPage() {
   const {setTokens, setUser} = useAuthStore();
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState("");
+
+
+  //---------------------- BEGIN VALIDATION EMAIL, PASSWORD ----------------------//
+  const validateEmail = (email: string) => {
+    // Regex cơ bản để kiểm tra định dạng email
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+  
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setEmail(val);
+
+    if (!validateEmail(val)) {
+      setEmailError("Email không hợp lệ");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setPassword(val);
+
+    if (val.length < 6) {
+      setPasswordError("Mật khẩu phải có ít nhất 6 ký tự");
+    } else {
+      setPasswordError("");
+    }
+  };
+  //---------------------- END VALIDATION EMAIL, PASSWORD ----------------------//
 
   const onFinish = async() => {
-    console.log('email, password ===>', email, password);
-    const responseLogin = await axios.post(`${env.API_URL}/auth/login`, 
-      {
-        email,
-        password
-      }
-    );
-    if(responseLogin.status === 200) {
-      setTokens(responseLogin?.data?.data);
-      console.log('Accesstoken ===>', responseLogin?.data?.data?.accessToken);
-    } else {
-      alert('Email hoặc mật khẩu của bạn chưa đúng, nếu bạn chưa có tài khoản có thể bấm vào link Đăng ký ở dưới')
-    }
-    
-    //lưu thông tin người đăng nhập vào storage
-    const responseProfile = await axios.get(`${env.API_URL}/auth/my-profile`,
-      {
-        headers: {
-          "Content-Type": 'application/json',
-          "Authorization": `bearer ${responseLogin?.data?.data?.accessToken}`
+    try {
+      //console.log('email, password ===>', email, password);
+      const responseLogin = await axios.post(`${env.API_URL}/auth/login`, 
+        {
+          email,
+          password
         }
+      )
+      if(responseLogin.status === 200) {
+        setTokens(responseLogin?.data?.data);
+        //console.log('Accesstoken ===>', responseLogin?.data?.data?.accessToken);
       }
-    )
-    if(responseProfile?.status === 200) {
-      setUser(responseProfile?.data?.data)
-      // chuyến hướng sang trang Dashboard
-      router.push('/');
+      
+      //lưu thông tin người đăng nhập vào storage
+      const responseProfile = await axios.get(`${env.API_URL}/auth/my-profile`,
+        {
+          headers: {
+            "Content-Type": 'application/json',
+            "Authorization": `bearer ${responseLogin?.data?.data?.accessToken}`
+          }
+        }
+      )
+      if(responseProfile?.status === 200) {
+        setUser(responseProfile?.data?.data)
+        // chuyến hướng sang trang Dashboard
+        router.push('/');
+      }
+    } catch (error: any) {
+    // Nếu lỗi từ server, show alert
+    if (error.response && error.response.data) {
+      alert("Email hoặc mật khẩu không đúng");
+    } else {
+      alert("Đã có lỗi xảy ra, vui lòng thử lại");
     }
+  }
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -53,25 +92,37 @@ export default function LoginpPage() {
         <CardContent className="space-y-6">
           <h1 className="text-2xl font-bold text-center">Đăng nhập</h1>
           <div className="space-y-4">
-            <div className="flex items-center border rounded px-3 py-2">
-              <Mail className="w-4 h-4 text-gray-500 mr-2" />
-              <Input 
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email" 
-              placeholder="Email" 
-              className="border-none p-0 focus-visible:ring-0" 
-              />
+            <div className="flex flex-col">
+              <div className="flex items-center border rounded px-3 py-2">
+                <Mail className="w-4 h-4 text-gray-500 mr-2" />
+                <Input 
+                onChange={handleEmailChange}
+                value={email}
+                type="email" 
+                placeholder="Email" 
+                className="border-none p-0 focus-visible:ring-0" 
+                />
+              </div>
+                {emailError && (
+              <div className="text-red-500 text-sm mt-1">{emailError}</div>
+              )}
             </div>
-            <div className="flex items-center border rounded px-3 py-2">
-              <Lock className="w-4 h-4 text-gray-500 mr-2" />
-              <Input 
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password" 
-              placeholder="Mật khẩu" 
-              className="border-none p-0 focus-visible:ring-0" 
-              />
+            <div className="flex flex-col">
+              <div className="flex items-center border rounded px-3 py-2">
+                <Lock className="w-4 h-4 text-gray-500 mr-2" />
+                <Input 
+                onChange={handlePasswordChange}
+                value={password}
+                type="password" 
+                placeholder="Mật khẩu" 
+                className="border-none p-0 focus-visible:ring-0" 
+                />
+              </div>
+              {passwordError && (
+              <div className="text-red-500 text-sm mt-1">
+                {passwordError}
+              </div>
+              )}
             </div>
             <Button 
             onClick={onFinish}
@@ -80,7 +131,6 @@ export default function LoginpPage() {
             </Button>
           </div>
           <RegisterButton />
-          
         </CardContent>
       </Card>
     </div>
