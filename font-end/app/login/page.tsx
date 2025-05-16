@@ -86,7 +86,6 @@ export default function LoginpPage() {
         alert("Đã có lỗi xảy ra, vui lòng thử lại");
       }
     }
-    }
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
