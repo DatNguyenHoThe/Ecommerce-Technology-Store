@@ -77,12 +77,10 @@ export default function LoginpPage() {
         // chuyến hướng sang trang Dashboard
         router.push('/');
       }
-    } catch (error: any) {
+    } catch (error) {
     // Nếu lỗi từ server, show alert
-    if (error.response && error.response.data) {
+      console.error("Email hoặc mật khẩu không đúng", error);
       alert("Email hoặc mật khẩu không đúng");
-    } else {
-      alert("Đã có lỗi xảy ra, vui lòng thử lại");
     }
   }
   }
