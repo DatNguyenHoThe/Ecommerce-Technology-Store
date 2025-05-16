@@ -79,10 +79,14 @@ export default function LoginpPage() {
       }
     } catch (error) {
     // Nếu lỗi từ server, show alert
-      console.error("Email hoặc mật khẩu không đúng", error);
-      alert("Email hoặc mật khẩu không đúng");
+      if (axios.isAxiosError(error) && error.response && error.response.data) {
+      const message = "Email hoặc mật khẩu không đúng";
+      alert(message);
+      } else {
+        alert("Đã có lỗi xảy ra, vui lòng thử lại");
+      }
     }
-  }
+    }
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
