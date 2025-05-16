@@ -17,18 +17,6 @@ const fetchTechNew = async(id: string) => {
   return res.json();
 };
 
-//getall
-const fetchTechNews = async() => {
-  const res = await fetch(`${env.API_URL}/techNews`, {
-    cache: 'force-cache',
-    next: { revalidate: 60 }
-  });
-  if(!res.ok) {
-    throw console.error ('fetch data is failed!');
-  }
-  return res.json();
-}
-
 export default async function Page({
     params,
   }: {
@@ -36,10 +24,6 @@ export default async function Page({
   }) {
     const { id } = await params
     const techNew = await fetchTechNew(id);
-    //console.log('techNew===>', techNew);
-    //khai báo tin nổi bật
-    //const techNews = await fetchTechNews();
-    //console.log('techNews ===>', techNews);
     return (
       <div className="grid grid-cols bg-gray-100 justify-center">
           <div className="w-[1200px] bg-white p-8 mt-2 mb-2">
