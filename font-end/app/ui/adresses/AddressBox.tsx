@@ -42,7 +42,7 @@ export default function AddressBox() {
           if(data) setAddresses(data);
         }
         getAddresses();
-      },[user?._id]);
+      },[user?._id, fetchAddresses]);
     //-------------------//END GET ALL ADDRESS//--------------------//
 
     //-------------------//BEGIN DELETE ADDRESS//--------------------//

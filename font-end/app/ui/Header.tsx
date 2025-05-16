@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import MenuHeader from './MenuHeader'
 import IconHeader from './IconHeader'
 import Link from 'next/link'
@@ -9,17 +9,14 @@ import UserInfo from './user/UserInfo'
 import { useRef } from "react";
 import { useRouter } from 'next/navigation'
 import { buildSlug } from '@/libs/slugify.helper'
-import { axiosClient } from '@/libs/axiosClient'
-import { env } from '@/libs/env.helper'
 import { useAuthStore } from '@/stores/useAuthStore'
-import { ICart } from '../types/types'
 import { useCartStore } from '@/stores/useCartStore'
 
 export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const {user} = useAuthStore();
-  const {carts, itemQty, fetchCart} = useCartStore();
+  const {itemQty, fetchCart} = useCartStore();
 
   //handle lấy value từ input và chuyển hướng
   const handleSearch = () => {
@@ -43,7 +40,7 @@ export default function Header() {
       <div className='relative w-[1200px] h-[47px]'>
         <Image
         alt='banner-header'
-        src='http://localhost:8889/uploads/banners/thang_04_laptop_gaming_banner_0087e9.webp'
+        src='http://ecommerce-technology-store.onrender.com/uploads/banners/thang_04_laptop_gaming_banner_0087e9.webp'
         fill
         sizes="(max-width: 1200px) 100vw, 1200px"
         priority
@@ -57,7 +54,7 @@ export default function Header() {
         className='relative w-[140px] h-[42px] block'>
           <Image
             alt='logo'
-            src='http://localhost:8889/uploads/logos/logo_header.png'
+            src='http://ecommerce-technology-store.onrender.com/uploads/logos/logo_header.png'
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 33vw"
             priority

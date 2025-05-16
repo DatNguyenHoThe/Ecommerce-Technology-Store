@@ -218,7 +218,6 @@ export default function InfoComponent({
                   type="checkbox"
                   id="hasTax"
                   onChange={(e) => {
-                    const checked = e.target.checked;
                     setTaxChecked(!taxChecked);
                     if (taxChecked === false) {
                       setValue("tax", 0); // nếu bỏ chọn, gán luôn giá trị 0

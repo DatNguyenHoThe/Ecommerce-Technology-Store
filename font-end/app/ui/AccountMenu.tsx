@@ -48,7 +48,7 @@ export default function AccountMenu() {
     );
   };
   //khai báo cho phần tử logout
-  const AccountItemLogout = ({ title, icon, link, active = false }: IAccountItem) => {
+  const AccountItemLogout = ({ title, icon, active = false }: IAccountItem) => {
     return (
       <div
         className="px-4 text-[18px] flex items-center"

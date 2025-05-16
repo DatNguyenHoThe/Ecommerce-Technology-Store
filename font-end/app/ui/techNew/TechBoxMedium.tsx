@@ -36,7 +36,6 @@ type TData = {
 
 export default function TechBoxMedium() {
   const [data, setData] = useState<TData | null>(null);
-      const router = useRouter();
       const limit = 8;
       const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,7 +45,7 @@ export default function TechBoxMedium() {
         const response = await axios.get(`${env.API_URL}/technews?page=${page}&limit=${limit}`);
         return response?.data?.data;
     } catch (error) {
-        console.log('fetching data failed')
+        console.log('fetching data failed', error);
     }
     };
 

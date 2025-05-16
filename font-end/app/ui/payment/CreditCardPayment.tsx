@@ -13,24 +13,18 @@ import { toast } from "sonner";
 
 //khai báo type để truyền data từ con lên cha
 interface CreditCardPaymentProps {
-  onPaymentSuccess: (data: any) => void;
-}
-
-type TPaymentResponse = {
-  transactionId: string,
-  gateway: string,
-  method: string,
-  metadata: object
+  onPaymentSuccess: (data: TPaymentData) => void;
 }
 
 type TPaymentData = {
   type: string,
   gateway: string,
   accountNumber: string,
-  expiryDate: Date,
+  expiryDate?: Date,
   cardholderName: string,
   isDefault: boolean,
-  transactionId: string
+  transactionId: string,
+  metadata: object
 }
 
 export default function CreditCardPayment({onPaymentSuccess}: CreditCardPaymentProps) {
@@ -110,7 +104,7 @@ const convertToDate = (month: string, year: string): Date | null => {
         type: paymentResponse.method,
         gateway: paymentResponse.gateway,
         accountNumber: cardNumber,
-        expiryDate: convertToDate(expiryMonth, expiryYear),
+        expiryDate: convertToDate(expiryMonth, expiryYear) ?? undefined,
         cardholderName: cardName,
         isDefault: true,
         transactionId: paymentResponse.transactionId,
@@ -122,6 +116,7 @@ const convertToDate = (month: string, year: string): Date | null => {
         toast.success('Bạn đã thanh toán thành công');
     } catch (error) {
       toast.error('Thanh toán thất bại, kiểm tra lại thông tin thanh toán');
+      console.log('Thanh toán thất bại, kiểm tra lại thông tin thanh toán', error);
       setIsProcessing(false);
     }
   };

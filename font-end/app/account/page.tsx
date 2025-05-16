@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useAuthStore } from "@/stores/useAuthStore";
-import { axiosClient } from "@/libs/axiosClient";
 import { env } from "@/libs/env.helper";
 import axios from "axios";
 
@@ -29,7 +28,7 @@ interface IUserUpdateInfo {
 }
 
 export default function PersonalInfoForm() {
-  const {user, tokens} = useAuthStore();
+  const {user, tokens, setUser} = useAuthStore();
   //console.log('email===>',user?.email);
   //Khai báo form data
   const [formData, setFormData] = useState<IUserUpdateInfo>({
@@ -80,16 +79,18 @@ export default function PersonalInfoForm() {
       }
     );
     if(response.status === 200) {
+      const { password, ...updateUser } = response.data;
+      console.log('updateUser====>', updateUser);
+      // Cập nhật user vào store
+      //setUser(updateUser);
       alert('Cập nhật dữ liệu thành công');
-      return response.data;
+      return updateUser;
     }
     } catch (error) {
       console.log('fetching data is failed', error);
     }
   };
   
-
-  //sử dụng useEffect để lấy dữ liệu về và lưu vào storage
 
   return (
     <div className="w-[900px] h-[395px] p-6 bg-white rounded-md shadow-md space-y-6">

@@ -2,6 +2,7 @@ import CommentButton from "@/app/ui/buton/CommentButton";
 import LikeButton from "@/app/ui/buton/LikeButton";
 import TechBoxActive from "@/app/ui/techNew/TechBoxActive";
 import Image from "next/image";
+import { env } from "@/libs/env.helper";
 
 interface ITechNew {
   _id: string,
@@ -13,7 +14,7 @@ interface ITechNew {
 
 //fetch detail technology news
 const fetchTechNew = async(id: string) => {
-  const res = await fetch(`http://localhost:8889/api/v1/techNews/${id}`, {
+  const res = await fetch(`${env.API_URL}/techNews/${id}`, {
     cache: 'force-cache',
     next: { revalidate: 60 }
   });
@@ -25,7 +26,7 @@ const fetchTechNew = async(id: string) => {
 
 //getall
 const fetchTechNews = async() => {
-  const res = await fetch(`http://localhost:8889/api/v1/techNews`, {
+  const res = await fetch(`${env.API_URL}/techNews`, {
     cache: 'force-cache',
     next: { revalidate: 60 }
   });
@@ -46,10 +47,6 @@ export default async function Page({
     //khai báo tin nổi bật
     const techNews = await fetchTechNews();
     //console.log('techNews ===>', techNews);
-    const relatedtechNews = techNews?.data?.techNews
-    .filter((techNew: ITechNew) => techNew._id !== id) // loại trừ bài đang xem
-    .sort(() => Math.random() - 0.5) // shuffle ngẫu nhiên
-    .slice(0, 3); // lấy 3 bài đầu tiên sau khi shuffle
     return (
       <div className="grid grid-cols bg-gray-100 justify-center">
           <div className="w-[1200px] bg-white p-8 mt-2 mb-2">

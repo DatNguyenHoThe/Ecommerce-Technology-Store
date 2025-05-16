@@ -16,47 +16,47 @@ export default function Home() {
   const promoBoxs = [
     {
       name: 'thang_04_layout_web__01',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__01.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__01.webp',
       link: '/pages/bang-gia-thu-san-pham-cu'
     },
     {
       name: 'thang_04_layout_web__02',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__02.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__02.webp',
       link: '/collections/ban-phim'
     },
     {
       name: 'thang_04_layout_web__03',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__03.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__03.webp',
       link: '/products/pc-gvn-intel-i5-12400f-vga-rtx-4060'
     },
     {
       name: 'thang_04_layout_web__04',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__04.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__04.webp',
       link: '/collections/laptop'
     },
     {
       name: 'thang_04_layout_web__05',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__05.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__05.webp',
       link: '/collections/laptop'
     },
     {
       name: 'thang_04_banner_ver_2024_500x250',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_banner_ver_2024_500x250.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_banner_ver_2024_500x250.webp',
       link: '/pages/gvn-gaming-festival'
     },
     {
       name: 'thang_04_layout_web__06',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__06.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__06.webp',
       link: '/products/pc-gvn-intel-i3-12100f-vga-rx-6500xt'
     },
     {
       name: 'thang_04_layout_web__07',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__07.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__07.webp',
       link: '/collections/chuot'
     },
     {
       name: 'thang_04_layout_web__08',
-      imgUri: 'http://localhost:8889/uploads/services/thang_04_layout_web__08.webp',
+      imgUri: 'http://ecommerce-technology-store.onrender.com/uploads/services/thang_04_layout_web__08.webp',
       link: '/collections/man-hinh'
     },
   ];

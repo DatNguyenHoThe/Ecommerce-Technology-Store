@@ -3,7 +3,6 @@ import Link from "next/link";
 import type React from "react";
 
 import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   product: {
@@ -70,7 +69,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return keySpecs;
   };
 
-  const keySpecs = getKeySpecs();
 
   return (
     <Link href={`/products/${product.slug}`}>

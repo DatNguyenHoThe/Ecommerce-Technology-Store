@@ -2,10 +2,10 @@
 import { Home, Star } from "lucide-react";
 import Link from "next/link";
 import ProductGallery from "../../../components/SwiperClientComponent";
-import ProductCard from "@/components/ProductCard";
 import BuyButton from "@/app/ui/buton/BuyButton";
 import CollapsibleContentBlock from "@/components/CollapsibleContentBlock";
 import SimpleProductSlider from "@/components/SimpleProductSlider";
+import { env } from "@/libs/env.helper";
 
 interface Product {
   _id: string;
@@ -79,7 +79,7 @@ export default async function ProductDetailPage({
 
   console.log('slug===>', slug);
   const res = await fetch(
-    `http://localhost:8889/api/v1/products/${slug}`,
+    `${env.API_URL}/products/${slug}`,
     {
       cache: "no-store",
     }
@@ -99,7 +99,7 @@ export default async function ProductDetailPage({
   console.log("category===>", product.category);
   try {
     const categoryRes = await fetch(
-      `http://localhost:8889/api/v1/categories/${product.category}`,
+      `${env.API_URL}/categories/${product.category}`,
       { cache: "no-store" }
     );
     if (categoryRes.ok) {
@@ -115,7 +115,7 @@ export default async function ProductDetailPage({
   let similarProducts: Product[] = [];
   try {
     const similarRes = await fetch(
-      `http://localhost:8889/api/v1/products?category_slug=${categorySlug}&limit=5`,
+      `${env.API_URL}/products?category_slug=${categorySlug}&limit=5`,
       { cache: "no-store" }
     );
     if (similarRes.ok) {
@@ -131,7 +131,7 @@ export default async function ProductDetailPage({
   let reviews: IReview[] = [];
   try {
     const reviewsRes = await fetch(
-      `http://localhost:8889/api/v1/reviews?productId=${product._id}`,
+      `${env.API_URL}/reviews?productId=${product._id}`,
       { cache: "no-store" }
     );
     if (reviewsRes.ok) {

@@ -47,7 +47,7 @@ export default function OrdersPage() {
       };
     
     getOrders();
-  }},[user?._id]);
+  }},[user?._id, fetchOrders]);
   //console.log('orders===>', orders)
 
   const orderDate = new Date().toLocaleDateString('vi-VN');

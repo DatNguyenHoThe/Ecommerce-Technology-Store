@@ -16,19 +16,19 @@ export default function PurchaseGuidePage() {
 
       <h2 className="text-2xl font-semibold text-red-400 mb-4">2. Thêm sản phẩm vào giỏ hàng</h2>
       <ul className="list-disc pl-6 mb-6">
-        <li className="mb-2">Chọn sản phẩm mong muốn và nhấn nút "Thêm vào giỏ hàng".</li>
+        <li className="mb-2">Chọn sản phẩm mong muốn và nhấn nút &quot;Thêm vào giỏ hàng&quot;.</li>
         <li className="mb-2">Kiểm tra giỏ hàng để đảm bảo đúng sản phẩm và số lượng.</li>
       </ul>
 
       <h2 className="text-2xl font-semibold text-red-400 mb-4">3. Tiến hành thanh toán</h2>
       <ul className="list-disc pl-6 mb-6">
-        <li className="mb-2">Nhấn nút "Thanh toán" để chuyển đến trang thanh toán.</li>
+        <li className="mb-2">Nhấn nút &quot;Thanh toán&quot; để chuyển đến trang thanh toán.</li>
         <li className="mb-2">Nhập đầy đủ thông tin giao hàng và chọn phương thức thanh toán phù hợp.</li>
       </ul>
 
       <h2 className="text-2xl font-semibold text-red-400 mb-4">4. Xác nhận và nhận hàng</h2>
       <ul className="list-disc pl-6 mb-6">
-        <li className="mb-2">Kiểm tra lại thông tin đơn hàng và nhấn nút "Xác nhận đặt hàng".</li>
+        <li className="mb-2">Kiểm tra lại thông tin đơn hàng và nhấn nút &quot;Xác nhận đặt hàng&quot;.</li>
         <li className="mb-2">Nhận thông báo xác nhận đơn hàng qua email và theo dõi trạng thái giao hàng.</li>
       </ul>
 

@@ -51,7 +51,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt="ship_1"
-                src="http://localhost:8889/uploads/shippings/ship_1.webp"
+                src="http://ecommerce-technology-store.onrender.com/uploads/shippings/ship_1.webp"
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -59,7 +59,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='ship_2'
-                src='http://localhost:8889/uploads/shippings/ship_2.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/shippings/ship_2.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -67,7 +67,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='ship_3'
-                src='http://localhost:8889/uploads/shippings/ship_3.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/shippings/ship_3.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -75,7 +75,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='ship_4'
-                src='http://localhost:8889/uploads/shippings/ship_4.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/shippings/ship_4.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -86,7 +86,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_1'
-                src='http://localhost:8889/uploads/payment_methods/pay_1.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_1.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -94,7 +94,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_2'
-                src='http://localhost:8889/uploads/payment_methods/pay_2.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_2.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -102,7 +102,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_3'
-                src='http://localhost:8889/uploads/payment_methods/pay_3.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_3.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -110,7 +110,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_4'
-                src='http://localhost:8889/uploads/payment_methods/pay_4.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_4.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -120,7 +120,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_5'
-                src='http://localhost:8889/uploads/payment_methods/pay_5.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_5.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -128,7 +128,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_6'
-                src='http://localhost:8889/uploads/payment_methods/pay_6.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_6.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -136,7 +136,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_7'
-                src='http://localhost:8889/uploads/payment_methods/pay_7.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_7.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -144,7 +144,7 @@ export default function Footer() {
               <div className="relative w-[73px] h-[35px]">
                 <Image
                 alt='pay_8'
-                src='http://localhost:8889/uploads/payment_methods/pay_8.webp'
+                src='http://ecommerce-technology-store.onrender.com/uploads/payment_methods/pay_8.webp'
                 fill
                 sizes="(max-width: 768px) 100vw, 73px"
                 />
@@ -167,7 +167,7 @@ export default function Footer() {
                 <Link href='https://www.facebook.com/gearvnhcm'>
                   <Image 
                   alt='facebook'
-                  src='http://localhost:8889/uploads/social_network/facebook_1_0e31d70174824ea184c759534430deec.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/social_network/facebook_1_0e31d70174824ea184c759534430deec.webp'
                   width={32}
                   height={32}
                   className="cursor-pointer"
@@ -176,7 +176,7 @@ export default function Footer() {
                 <Link href='https://www.tiktok.com/@gearvn.store'>
                   <Image 
                   alt='tiktok'
-                  src='http://localhost:8889/uploads/social_network/tiktok_logo_fe1e020f470a4d679064cec31bc676e4.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/social_network/tiktok_logo_fe1e020f470a4d679064cec31bc676e4.webp'
                   width={32}
                   height={32}
                   />
@@ -184,7 +184,7 @@ export default function Footer() {
                 <Link href='https://bit.ly/GearvnVideos'>
                   <Image 
                   alt='youtube'
-                  src='http://localhost:8889/uploads/social_network/youtube_1_d8de1f41ca614424aca55aa0c2791684.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/social_network/youtube_1_d8de1f41ca614424aca55aa0c2791684.webp'
                   width={32}
                   height={32}
                   />
@@ -192,7 +192,7 @@ export default function Footer() {
                 <Link href='https://zalo.me/450955578960321912'>
                   <Image 
                   alt='icon_zalo'
-                  src='http://localhost:8889/uploads/social_network/icon_zalo__1__f5d6f273786c4db4a3157f494019ab1e.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/social_network/icon_zalo__1__f5d6f273786c4db4a3157f494019ab1e.webp'
                   width={32}
                   height={32}
                   />
@@ -200,7 +200,7 @@ export default function Footer() {
                 <Link href='https://www.facebook.com/groups/VietnamGamingConner'>
                   <Image 
                   alt='group'
-                  src='http://localhost:8889/uploads/social_network/group_1_54d23abd89b74ead806840aa9458661d.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/social_network/group_1_54d23abd89b74ead806840aa9458661d.webp'
                   width={32}
                   height={32}
                   />
@@ -210,7 +210,7 @@ export default function Footer() {
                 <Link href='http://online.gov.vn/Home'>
                   <Image 
                   alt='logo_bct'
-                  src='http://localhost:8889/uploads/logos/logo_bct.webp'
+                  src='http://ecommerce-technology-store.onrender.com/uploads/logos/logo_bct.webp'
                   width={132}
                   height={52}
                   />

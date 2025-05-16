@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -14,7 +14,7 @@ import { ICart, ICartItem } from "@/app/types/types";
 
 export default function CartComponent({ onNext }: { onNext: () => void }) {
   const {user} = useAuthStore();
-  const {carts, fetchCart, itemQty} = useCartStore();
+  const {carts, fetchCart} = useCartStore();
     
     
   //fetch carts về khi carts hoặc user thay đổi
@@ -66,7 +66,7 @@ export default function CartComponent({ onNext }: { onNext: () => void }) {
             alert('Xóa sản phẩm thất bại')
           }
         } catch (error) {
-          console.error('delete cartitem is failed');
+          console.error('delete cartitem is failed', error);
         }
       }
       //gọi hàm xóa sản phẩm

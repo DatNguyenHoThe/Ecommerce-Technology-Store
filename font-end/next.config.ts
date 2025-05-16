@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
         hostname: 'product.hstatic.net',
         port: '',
         pathname: '/200000722513/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'ecommerce-technology-store.onrender.com',
+        port: '',
+        pathname: '/uploads/**',
       }
     ],
   },

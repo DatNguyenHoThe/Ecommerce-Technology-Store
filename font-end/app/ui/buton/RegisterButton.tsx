@@ -14,7 +14,7 @@ import { type Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { env } from "@/libs/env.helper";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Upload, X } from "lucide-react";
 import Image from "next/image";
 
@@ -51,6 +51,7 @@ export default function RegisterButton() {
   const [isUploading, setIsUploading] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  console.log('isUploading===>', isUploading);
   //khai báo form
   const {
     register,
@@ -115,14 +116,9 @@ export default function RegisterButton() {
       } else {
         alert("Tải ảnh lên thất bại!");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error uploading image:", error);
-      console.error("Error details:", error.response?.data);
-      alert(
-        `Có lỗi xảy ra khi tải ảnh lên: ${
-          error.response?.data?.message || error.message
-        }`
-      );
+      alert('Có lỗi xảy ra khi tải ảnh lên');
     } finally {
       setIsUploading(false);
     }

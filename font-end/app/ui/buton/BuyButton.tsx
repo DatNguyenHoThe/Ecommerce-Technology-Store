@@ -3,10 +3,8 @@
 import { useEffect, useState } from "react";
 import ClickBuyDialog from "@/app/ui/cart/ClickBuyDialog";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { axiosClient } from "@/libs/axiosClient";
-import { env } from "@/libs/env.helper";
-import { ICart } from "@/app/types/types";
 import { useCartStore } from "@/stores/useCartStore";
+import { ICartItem } from "@/app/types/types";
 
 interface BuyButtonProps {
   productId: string;
@@ -37,7 +35,7 @@ export default function BuyButton({
       setOpenDialog(true);
     } else {
       //kiểm tra xem đã có sản phẩm đó trong giỏ hàng hay chưa
-      if (carts && carts.items.some((item: any) => productId === item.product._id)) {
+      if (carts && carts.items.some((item: ICartItem) => productId === item.product._id)) {
         alert(
           "Sản phẩm này đã có trong giỏ hàng, bạn có thể kiểm tra giỏ hàng để biết thêm chi tiết"
         );

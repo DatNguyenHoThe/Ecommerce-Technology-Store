@@ -11,10 +11,21 @@ import CodPayment from '../payment/CodPayment';
 import Image from 'next/image';
 import { IOrder } from '@/app/types/types';
 
+type TPaymentData = {
+  type: string,
+  gateway: string,
+  accountNumber: string,
+  expiryDate?: Date,
+  cardholderName: string,
+  isDefault: boolean,
+  transactionId: string,
+  metadata: object
+}
+
 
 export default function PaymentComponent({ onNext }: { onNext: () => void }) {
   const [orders, setOrders] = useState<IOrder[] | null>(null);
-  const [paymentData, setPaymentData] = useState<any>(null); //Dữ liệu từ các component con
+  const [paymentData, setPaymentData] = useState<TPaymentData | null>(null); //Dữ liệu từ các component con
   const {user} = useAuthStore();
 
   //fetch dữ liệu từ orders về
@@ -38,7 +49,7 @@ export default function PaymentComponent({ onNext }: { onNext: () => void }) {
       };
     
     getOrders();
-  }},[user?._id]);
+  }},[user?._id, fetchOrders]);
   //console.log('orders===>', orders) 
 
   //----------------------BEGIN KHAI BÁO ON HANDLE CHECK OUT-----------------//

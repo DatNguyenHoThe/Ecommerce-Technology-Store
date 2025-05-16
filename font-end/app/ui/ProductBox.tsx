@@ -113,7 +113,7 @@ const fetchProduct = async(): Promise<TProduct[]> => {
             }
         };
         getProducts();
-    },[]);
+    },[fetchProduct]);
 
   return (
     <div className='bg-white mb-2 p-2'>

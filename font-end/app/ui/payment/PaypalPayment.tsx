@@ -7,15 +7,7 @@ import { toast } from "sonner";
 
 //khai báo type để truyền data từ con lên cha
 interface PaypalPaymentProps {
-  onPaymentSuccess: (data: any) => void;
-}
-
-type TPaymentResponse = {
-  transactionId: string,
-  gateway: string,
-  method: string,
-  metadata: object,
-  payer: object
+  onPaymentSuccess: (data: TPaymentData) => void;
 }
 
 type TPaymentData = {
@@ -25,7 +17,8 @@ type TPaymentData = {
   expiryDate?: Date,
   cardholderName: string,
   isDefault: boolean,
-  transactionId: string
+  transactionId: string,
+  metadata: object
 }
 
 export default function PaypalPayment({onPaymentSuccess}: PaypalPaymentProps) {
@@ -69,6 +62,7 @@ export default function PaypalPayment({onPaymentSuccess}: PaypalPaymentProps) {
         toast.success('Bạn đã thanh toán thành công');
     } catch (error) {
       toast.error('Thanh toán thất bại, kiểm tra lại thông tin thanh toán');
+      console.error('Thanh toán thất bại, kiểm tra lại thông tin thanh toán:', error);
       setIsProcessing(false);
     }
   };

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { CreditCard, IdCard, ShieldCheck, ShoppingCart, Trash2 } from "lucide-react";
+import { CreditCard, IdCard, ShieldCheck, ShoppingCart} from "lucide-react";
 import { axiosClient } from "@/libs/axiosClient";
 import { env } from "@/libs/env.helper";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -60,7 +60,7 @@ export default function CartPage() {
   const [carts, setCarts] = useState<ICart | null>(null);
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  console.log('cartItems===>', cartItems);
+  console.log('cartItems, totalAmount===>', cartItems, totalAmount);
 
 
   //----------------------BEGIN GET ALL CART-------------------------//

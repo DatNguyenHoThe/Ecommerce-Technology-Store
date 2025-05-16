@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Laptop, Smartphone, Headphones, Camera, Watch, Tv, Gamepad, Home, ChevronRight, LaptopMinimal, PcCase, MemoryStick, Speaker, Monitor, Keyboard, Mouse, Armchair, Router, Gamepad2, Cable, Gift } from "lucide-react";
+import { Laptop, Headphones, ChevronRight, PcCase, MemoryStick, Speaker, Monitor, Keyboard, Mouse, Armchair, Router, Gamepad2, Cable, Gift } from "lucide-react";
 import { buildSlug } from "@/libs/slugify.helper";
 
 const generateLink = (category: string, subcategory: string, title: string) => {

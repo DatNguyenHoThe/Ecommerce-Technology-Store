@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { Filter, Home } from 'lucide-react';
 import Link from "next/link";
+import { env } from "@/libs/env.helper";
 
 interface Product {
   _id: string;
@@ -83,7 +84,7 @@ export default function ProductPageByCategoryPage() {
       }),
     });
 
-    const query = `http://localhost:8889/api/v1/products?${queryParams.toString()}`;
+    const query = `${env.API_URL}/products?${queryParams.toString()}`;
     console.log('query===>', query);
     try {
       const res = await fetch(query);

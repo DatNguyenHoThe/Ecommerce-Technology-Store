@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 import { Filter, Home } from "lucide-react";
+import { env } from "@/libs/env.helper";
 
 interface Product {
   _id: string;
@@ -73,7 +74,7 @@ export default function ProductPage() {
       try {
         const queryString = new URLSearchParams(filters || {}).toString();
         console.log('filters====>', filters);
-        const res = await fetch(`http://localhost:8889/api/v1/products?${queryString}`);
+        const res = await fetch(`${env.API_URL}/products?${queryString}`);
         const data: ApiResponse = await res.json();
         setProducts(data.data.products);
         setTotalPages(Math.ceil(data.data.pagination.totalRecord / 12));
@@ -92,7 +93,7 @@ export default function ProductPage() {
 
   // Cập nhật filter
 const updateFilter = (keyOrString: string, value?: string) => {
-  let newFilters = { ...filters };
+  const newFilters = { ...filters };
   
   // Kiểm tra xem có phải là chuỗi với nhiều tham số hay không
   if (keyOrString.includes('&') || keyOrString.includes('=')) {
@@ -181,8 +182,10 @@ const updateFilter = (keyOrString: string, value?: string) => {
             >
               <option value="">Tất cả</option>
               <option value="laptop">Laptop</option>
-              <option value="smartphone">Smartphone</option>
-              <option value="tablet">Tablet</option>
+              <option value="pc">PC</option>
+              <option value="chuot">Chuột</option>
+              <option value="ban-phim">Bàn phím</option>
+              <option value="loa">Tai nghe</option>
             </select>
           </div>
 

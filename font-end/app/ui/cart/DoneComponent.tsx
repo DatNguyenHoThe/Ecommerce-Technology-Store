@@ -84,7 +84,7 @@ export default function DoneComponent({resetCartStep}:{resetCartStep: ()=>void})
     };
 
     getOrders();
-  },[]);
+  },[fetchOrders]);
 
   const orderDate = new Date().toLocaleDateString('vi-VN')
 
