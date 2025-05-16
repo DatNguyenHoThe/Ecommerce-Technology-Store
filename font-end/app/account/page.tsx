@@ -28,7 +28,7 @@ interface IUserUpdateInfo {
 }
 
 export default function PersonalInfoForm() {
-  const {user, tokens, setUser} = useAuthStore();
+  const {user, tokens} = useAuthStore();
   //console.log('email===>',user?.email);
   //Khai báo form data
   const [formData, setFormData] = useState<IUserUpdateInfo>({
@@ -79,7 +79,7 @@ export default function PersonalInfoForm() {
       }
     );
     if(response.status === 200) {
-      const { password, ...updateUser } = response.data;
+      const updateUser = response.data;
       console.log('updateUser====>', updateUser);
       // Cập nhật user vào store
       //setUser(updateUser);

@@ -4,13 +4,6 @@ import TechBoxActive from "@/app/ui/techNew/TechBoxActive";
 import Image from "next/image";
 import { env } from "@/libs/env.helper";
 
-interface ITechNew {
-  _id: string,
-  thumbnail: string,
-  title: string,
-  description: string,
-  content: string
-}
 
 //fetch detail technology news
 const fetchTechNew = async(id: string) => {
@@ -45,7 +38,7 @@ export default async function Page({
     const techNew = await fetchTechNew(id);
     //console.log('techNew===>', techNew);
     //khai báo tin nổi bật
-    const techNews = await fetchTechNews();
+    //const techNews = await fetchTechNews();
     //console.log('techNews ===>', techNews);
     return (
       <div className="grid grid-cols bg-gray-100 justify-center">

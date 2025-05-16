@@ -35,41 +35,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     100 - (product.salePrice / originalPrice) * 100
   );
 
-  // Extract key specs from attributes for spec badges
-  const getKeySpecs = () => {
-    const keySpecs: Record<string, string> = {};
-
-    // Try to extract common PC specs from attributes
-    product.attributes.forEach((attr) => {
-      if (typeof attr === "string") {
-        // Handle simple string attributes
-        return;
-      }
-
-      const name = attr.name.toLowerCase();
-      const value = attr.value;
-
-      if (name.includes("cpu") || name.includes("processor")) {
-        keySpecs["cpu"] = value;
-      } else if (name.includes("gpu") || name.includes("graphics")) {
-        keySpecs["gpu"] = value;
-      } else if (name.includes("ram") || name.includes("memory")) {
-        keySpecs["ram"] = value;
-      } else if (
-        name.includes("storage") ||
-        name.includes("ssd") ||
-        name.includes("hdd")
-      ) {
-        keySpecs["storage"] = value;
-      } else if (name.includes("motherboard")) {
-        keySpecs["motherboard"] = value;
-      }
-    });
-
-    return keySpecs;
-  };
-
-
   return (
     <Link href={`/products/${product.slug}`}>
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200 h-full flex flex-col hover:border-none">

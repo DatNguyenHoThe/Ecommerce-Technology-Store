@@ -14,7 +14,7 @@ import { type Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { env } from "@/libs/env.helper";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { Upload, X } from "lucide-react";
 import Image from "next/image";
 
