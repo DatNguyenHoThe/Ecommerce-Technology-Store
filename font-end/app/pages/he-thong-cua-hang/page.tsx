@@ -59,7 +59,7 @@ const stores = [
       <div className="relative w-full">
         <div className="relative w-full h-[400px]">
           <Image
-            src="http://localhost:8889/uploads/showrooms/background_4303_png_860.png"
+            src="http://ecommerce-technology-store.onrender.com/uploads/showrooms/background_4303_png_860.png"
             alt="background-showrooms"
             fill
             className="object-cover"
@@ -86,7 +86,7 @@ const stores = [
             <div className="border rounded-lg overflow-hidden">
               <div className="p-4 flex justify-center">
                 <Image
-                  src="http://localhost:8889/uploads/showrooms/ecomerce_store.png"
+                  src="http://ecommerce-technology-store.onrender.com/uploads/showrooms/ecomerce_store.png"
                   alt="Southern Region Building"
                   width={200}
                   height={150}
@@ -109,7 +109,7 @@ const stores = [
             <div className="border rounded-lg overflow-hidden">
               <div className="p-4 flex justify-center">
                 <Image
-                  src="http://localhost:8889/uploads/showrooms/ecomerce_store.png"
+                  src="http://ecommerce-technology-store.onrender.com/uploads/showrooms/ecomerce_store.png"
                   alt="Northern Region Building"
                   width={200}
                   height={150}
