@@ -28,6 +28,8 @@ export default function LoginpPage() {
     if(responseLogin.status === 200) {
       setTokens(responseLogin?.data?.data);
       console.log('Accesstoken ===>', responseLogin?.data?.data?.accessToken);
+    } else {
+      alert('Email hoặc mật khẩu của bạn chưa đúng, nếu bạn chưa có tài khoản có thể bấm vào link Đăng ký ở dưới')
     }
     
     //lưu thông tin người đăng nhập vào storage
