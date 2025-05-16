@@ -47,7 +47,7 @@ const getAll = async(query: any) => {
 }
 
 const getById = async(id: string) => {
-    const user = await User.findById(id)
+    const user = await User.findById(id).select('-password');
         if (!user) {
             //throw new Error("user not found");
             throw createError(404, "user not found");
@@ -94,7 +94,7 @@ const updateById = async(id: string, payload: any) => {
     // Lọc bỏ các field rỗng ("") hoặc null/undefined
     const cleanUpdates = Object.fromEntries(
     Object.entries(payload).filter(
-      ([_, value]) => value !== "" && value !== null && value !== undefined
+      ([value]) => value !== "" && value !== null && value !== undefined
     )
   );
 
