@@ -10,6 +10,7 @@ import { env } from "@/libs/env.helper"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import RegisterButton from "../ui/buton/RegisterButton"
+import ForgotPasswordButton from "../ui/buton/ForgotPasswordButton"
 
 export default function LoginpPage() {
   const {setTokens, setUser} = useAuthStore();
@@ -125,6 +126,7 @@ export default function LoginpPage() {
               </div>
               )}
             </div>
+            <ForgotPasswordButton />
             <Button 
             onClick={onFinish}
             className="w-full">
