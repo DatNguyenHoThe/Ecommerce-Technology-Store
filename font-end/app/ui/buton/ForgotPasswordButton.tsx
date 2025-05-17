@@ -84,7 +84,7 @@ export default function ForgotPasswordButton() {
         <DialogContent>
           <DialogHeader className="flex justify-center">
             <DialogTitle className="flex justify-center pb-4 border-b border-gray-300 font-bold text-red-500">
-              Đăng ký tài khoản
+              Quên mật khẩu
             </DialogTitle>
           </DialogHeader>
 
