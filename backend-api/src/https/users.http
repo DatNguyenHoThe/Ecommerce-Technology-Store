@@ -25,7 +25,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODAwYTE3N
 ### update by id
 PUT http://localhost:8889/api/v1/users/6826b336fe4cf297b2f754d9
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0YzVmMDI1MTYwYjIyNGY0MTFlNjEiLCJlbWFpbCI6Im5ndXllbmhvdGhlZGF0QGdtYWlsLmNvbSIsImlhdCI6MTc0NDA5NDc0NywiZXhwIjoxNzQ0MTgxMTQ3fQ.oXb0IY9Bx2LTR9NrzWnbyrEJ4w1PMGYAlZf5EeFVuF0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI2YjMzNmZlNGNmMjk3YjJmNzU0ZDkiLCJlbWFpbCI6InF1YW5naHVuZ0BnbWFpbC5jb20iLCJpYXQiOjE3NDczNjY3MzIsImV4cCI6MTc0NzQ1MzEzMn0.amREiAa8Z1oMMTGRTKh_DoVWsWyIdTvTBz6FMCTpjXg
 
 {
     "fullName": "Quang Hung",
