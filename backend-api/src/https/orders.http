@@ -1,5 +1,5 @@
 ### GET ALL
-GET http://localhost:8889/api/v1/orders
+GET http://localhost:8889/api/v1/orders?startDate=2025-05-13&endDate=2025-05-15
 
 ### get by id
 GET http://localhost:8889/api/v1/orders/67def287122b4c409039e79e

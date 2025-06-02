@@ -279,6 +279,93 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFjYWIzZ
   "vendor": "6805ebf6c350793d7da27a88"
 }
 
+### test create with not salePrince
+
+POST http://localhost:8889/api/v1/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0MDQwMjA5MzQwOGRhMzNjNzM4ZjMiLCJlbWFpbCI6InRoZWRhdEBnbWFpbC5jb20iLCJpYXQiOjE3NDg4MzI1MjUsImV4cCI6MTc0ODkxODkyNX0.tdeOc8lj8GyQbjIyi8hc6TXdzX5EwJLne5Pw_YXlXUI
+
+{
+  "product_name": "test with not salePrince",
+  "price": 4990000,
+  "stock": 100,
+  "images": [
+    "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/arvn_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch_1_f163cb90590f4640bb0.webp",
+    "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/arvn_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch_1_42b4ca48ebbf461.webp",
+    "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/arvn_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch_2_f5e4262062d44022b0d.webp",
+    "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/arvn_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch_3_b1d37aab419940ed90a.webp"
+  ],
+  "rating": 4.9,
+  "tags": [
+  "Không dây",
+  "ABS",
+  "RGB"
+],
+  "bestSale": false,
+  "flashSale": false,
+    "contentBlock": [
+    {
+      "type": "text",
+      "content": "<strong>Đánh giá chi tiết bàn phím Asus ROG Strix Scope II 96 Wireless ROG NX Snow Switch</strong>"
+    },
+    {
+      "type": "text",
+      "content": "Dù bạn có am hiểu về công nghệ hay không thì bạn chắc chắn vẫn biết đến các thiết bị công nghệ của thương hiệu Asus như laptop Asus, màn hình Asus… Bên cạnh đó thì các thiết bị Gaming Gear đặc biệt là không thể nhắc đến Bàn phím Asus ROG Strix Scope II 96 Wireless ROG NX Snow Switch với nhiều công năng vượt trội, hãy cùng GEARVN tìm hiểu ngay sau đây."
+    },
+    {
+      "type": "image",
+      "src": "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/n_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch___1__1024x1024.jpg",
+      "alt": "image_1"
+    },
+    {
+      "type": "text",
+      "content": "<strong>Thiết kế thu gọn tối đa với bàn phím 96%</strong>"
+    },
+    {
+      "type": "text",
+      "content": "Bàn phím Asus ROG Strix Scope II 96 Wireless được xem là bàn phím 96% khi vẫn giữ lại toàn bộ các phím nhưng lại được thu gọn khoảng cách một cách tối đa, từ đó mà kích thước của chiếc bàn phím này chỉ lớn hơn bàn phím tiêu chuẩn 80% chỉ 1cm. Tuy là được thu gọn thiết kế một cách tối đa nhưng bàn phím lại mang trong mình vẻ cứng cáp và hoành tráng khi có cho mình trọng lượng"
+    },
+     {
+      "type": "image",
+      "src": "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch___11__1024x1024.webp",
+      "alt": "image_2"
+    },
+    {
+      "type": "text",
+      "content": "<strong>Màu sắc LED đồng bộ với nhiều thiết bị</strong>"
+    },
+    {
+      "type": "text",
+      "content": "Bàn phím Asus ROG Strix Scope II 96 Wireless sở hữu cho mình bộ LED RGB trong từng phím. Cùng với đó nếu bạn sở hữu laptop Asus, chuột Asus, tai nghe Asus các gamer sẽ còn được có thể sử dụng thêm tính năng Asus Aura sync đồng bộ ánh sáng và màu sắc cho mọi thiết bị Asus. Việc sở hữu khả năng thay đổi và kết hợp màu sắc cho sản phẩm công nghệ giúp cho trải nghiệm thư giãn cũng như chơi game của các gamer được nâng cấp lên một level mới."
+    },
+    {
+      "type": "image",
+      "src": "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch___12__1024x1024.webp",
+      "alt": "image_3"
+    },
+    {
+      "type": "text",
+      "content": "<strong>Sự kết hợp hoàn hảo cho dân gaming</strong>"
+    },
+    {
+      "type": "text",
+      "content": "Bạn sẽ có thể trải nghiệm cảm giác chơi game thuận tiện nhất khi bàn phím Asus ROG Strix Scope II 96 Wireless ROG NX Snow Switch sở hữu cho mình tính năng Anti -Ghosting giúp anh em linh hoạt các nút bấm nhằm né được những đòn đánh và phản công địch một cách tối ưu. Bên cạnh đó, anh em có thể kích hoạt thêm Marco Key vào bất kỳ phím nào trên bàn phím để có thể linh hoạt và tiết kiệm thời gian nhất trong quá trình sử dụng."
+    },
+    {
+      "type": "image",
+      "src": "http://localhost:8889/uploads/Ban_phim_Asus_ROG_Strix_Scope_II_96_Wireless_ROG_NX_Snow_Switch/n_ban_phim_asus_rog_strix_scope_ii_96_wireless_rog_nx_snow_switch___8__1024x1024.webp",
+      "alt": "image_4"
+    },
+    {
+      "type": "text",
+      "content": "Bàn phím Asus ROG Strix Scope II 96 Wireless ROG NX Snow Switch có thể là sự lựa chọn tối ưu của các anh em gamer không chỉ vì các tính năng kể trên mà chiếc bàn phím này còn hỗ trợ kết nối đa thiết bị thuận lợi cho việc sử dụng của anh em trên mọi mặt trận."
+    }
+  ],
+  "category": "680518eb3556be73141264e8",
+  "brand": "6805e67efea56b05826cc2d6",
+  "vendor": "6805ebf6c350793d7da27a88"
+}
+
 
 ### update by id
 PUT http://localhost:8889/api/v1/products/6820e53880a8734921371e03
