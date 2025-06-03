@@ -73,17 +73,25 @@ const ProductItem = ({product}:{product:TProduct}) => {
                 ))}
             </div>
             <div className='flex flex-col pt-2 pb-2'>
-                <span className='line-through text-gray-500'>
-                    {product.price.toLocaleString()}₫
-                </span>
-                <div className='flex gap-x-3'>
+                {product.salePrice && product.salePrice < product.price ? (
+                    <>
+                    <span className='line-through text-gray-500'>
+                        {product.price.toLocaleString()}₫
+                    </span>
+                    <div className='flex gap-x-3'>
+                        <span className='text-red-500 font-bold'>
+                            {product.salePrice.toLocaleString()}₫
+                        </span>
+                        <span className='flex items-center text-red-500 font-semibold text-[13px] border-1 border-red-500 px-1 bg-red-50 rounded-sm'>
+                            -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
+                        </span>
+                    </div>
+                    </>
+                ) : (
                     <span className='text-red-500 font-bold'>
-                        {product.salePrice.toLocaleString()}₫
+                        {product.price.toLocaleString()}₫
                     </span>
-                    <span className='flex items-center text-red-500 font-semibold text-[13px] border-1 border-red-500 px-1 bg-red-50 rounded-sm'>
-                        -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
-                    </span>
-                </div>   
+                )} 
             </div>
             <div className="flex items-center gap-x-1 text-yellow-500">
                 <span className="font-semibold text-black">{product.rating.toFixed(1)}</span>

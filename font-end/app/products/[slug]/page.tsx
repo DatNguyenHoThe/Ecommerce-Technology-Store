@@ -192,15 +192,23 @@ export default async function ProductDetailPage({
           </div>
 
           <div className="mb-6 flex items-center space-x-4 text-lg">
-            <span className="line-through text-gray-400">
-              {formatPrice(originalPrice)}
-            </span>
-            <span className="text-red-600 font-bold text-xl">
-              {formatPrice(product.salePrice)}
-            </span>
-            {discountPercent > 0 && (
-              <span className="text-xs text-white bg-red-500 px-2 py-0.5 rounded-full">
-                -{discountPercent}%
+            {product.salePrice && product.salePrice < product.price ? (
+              <>
+              <span className="line-through text-gray-400">
+                {formatPrice(originalPrice)}
+              </span>
+              <span className="text-red-600 font-bold text-xl">
+                {formatPrice(product.salePrice)}
+              </span>
+              {discountPercent > 0 && (
+                <span className="text-xs text-white bg-red-500 px-2 py-0.5 rounded-full">
+                  -{discountPercent}%
+                </span>
+              )}
+              </>
+            ) : (
+              <span className="text-red-600 font-bold text-xl">
+                {formatPrice(product.price)}
               </span>
             )}
           </div>

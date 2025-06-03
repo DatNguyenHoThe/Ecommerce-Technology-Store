@@ -69,17 +69,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           {/* Pricing */}
           <div className="mt-auto">
-            <div className="text-gray-500 line-through text-sm">
-              {originalPrice.toLocaleString()}đ
-            </div>
-            <div className="flex items-center gap-2">
+            {product.salePrice && product.salePrice < product.price ? (
+              <>
+              <div className="text-gray-500 line-through text-sm">
+                {originalPrice.toLocaleString()}đ
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-red-600 font-bold text-1xl">
+                  {product.salePrice.toLocaleString()}đ
+                </span>
+                <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded">
+                  -{discountPercent}%
+                </span>
+              </div>
+              </>
+            ) : (
               <span className="text-red-600 font-bold text-1xl">
-                {product.salePrice.toLocaleString()}đ
+                {product.price.toLocaleString()}đ
               </span>
-              <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded">
-                -{discountPercent}%
-              </span>
-            </div>
+            )}
+            
           </div>
           {/* Rating */}
           <div className="flex items-center mt-2 text-sm text-gray-600">
