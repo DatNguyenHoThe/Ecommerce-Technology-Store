@@ -13,12 +13,28 @@ import { Separator } from "@/components/ui/Separator";
 import { IOrder } from "@/app/types/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 
+const statusColorMap: Record<string, string> = {
+  pending: 'text-gray-500',
+  processing: 'text-blue-500',
+  shipped: 'text-orange-500',
+  delivered: 'text-green-600',
+  cancelled: 'text-red-500'
+}
+
+const statusLabelMap: Record<string, string> = {
+  pending: 'Chờ xử lý',
+  processing: 'Đang xử lý',
+  shipped: 'Đang giao hàng',
+  delivered: 'Đã giao hàng',
+  cancelled: 'Đã hủy'
+}
 
 export default function OrderDetailPage() {
   const { id } = useParams();
   const [order, setOrder] = useState<IOrder | null>(null);
   const {user} = useAuthStore();
 
+  //lấy dữ liệu từ order về
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -36,6 +52,24 @@ export default function OrderDetailPage() {
 
   if (!order) return <div>Đang tải...</div>;
 
+  //gọi handle cancelled order
+  const handleCancelledOrder = async() => {
+    try {
+      const response = await axiosClient.put(`${env.API_URL}/orders/${id}`,
+        {
+          status: "cancelled"
+        }
+      );
+      if (response.status === 200) {
+        alert('Bạn đã hủy đơn hàng thành công')
+      } else {
+        alert('Bạn đã hủy đơn hàng thất bại, làm ơn chọn lý do hủy đơn hàng')
+      }
+    } catch (error) {
+      console.error('Cancelled order is failed', error);
+    }
+  }
+
   return (
     <div className="w-[900px] min-h-[395px] max-h-full mx-auto">
       <Card className="mb-6 pl-6">
@@ -45,9 +79,9 @@ export default function OrderDetailPage() {
           </h2>
           <p className="text-gray-500">
             Ngày đặt hàng:{" "}
-            {format(new Date(order.createdAt), "dd/MM/yyyy HH:mm")}
+            {format(new Date(order.createdAt), "HH:mm dd/MM/yyyy")}
           </p>
-          <p className="text-gray-500">Trạng thái: {order.status}</p>
+          <p className={statusColorMap[order.status]}>Trạng thái: {statusLabelMap[order.status]}</p>
         </CardHeader>
         <CardContent>
           <h3 className="font-semibold text-lg mb-2">Thông tin người nhận</h3>
@@ -96,7 +130,19 @@ export default function OrderDetailPage() {
         <Button variant="outline" asChild>
           <Link href="/">Tiếp tục mua sắm</Link>
         </Button>
-        <Button variant="destructive">Hủy đơn hàng</Button>
+        {order?.status !== 'cancelled' ? (
+          <Button 
+          variant="destructive"
+          onClick={handleCancelledOrder}
+          >Hủy đơn hàng
+          </Button>
+        ) : (
+          <Button 
+          variant="destructive"
+          disabled
+          >Đơn hàng đã hủy
+          </Button>
+        )}
       </div>
     </div>
   );

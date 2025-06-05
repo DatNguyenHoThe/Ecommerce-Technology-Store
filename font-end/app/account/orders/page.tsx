@@ -6,20 +6,23 @@ import { env } from '@/libs/env.helper';
 import { useAuthStore } from '@/stores/useAuthStore';
 import Link from 'next/link'
 import { useEffect, useState } from 'react';
+import { format } from "date-fns";
 
 
 const statusColorMap: Record<string, string> = {
-  received: 'text-gray-500',
+  pending: 'text-gray-500',
   processing: 'text-blue-500',
-  shipping: 'text-orange-500',
-  delivered: 'text-green-600'
+  shipped: 'text-orange-500',
+  delivered: 'text-green-600',
+  cancelled: 'text-red-500'
 }
 
 const statusLabelMap: Record<string, string> = {
-  received: 'Đã tiếp nhận',
+  pending: 'Chờ xử lý',
   processing: 'Đang xử lý',
-  shipping: 'Đang giao',
-  delivered: 'Đã giao'
+  shipped: 'Đang giao hàng',
+  delivered: 'Đã giao hàng',
+  cancelled: 'Đã hủy'
 }
 
 export default function OrdersPage() {
@@ -31,7 +34,7 @@ export default function OrdersPage() {
     try {
       const response = await axiosClient.get(`${env.API_URL}/orders/user/${user?._id}`);
       if(response.status === 200) {
-        console.log('order===>', response?.data?.data)
+        //console.log('order===>', response?.data?.data)
         return response?.data?.data;
       };
     } catch (error) {
@@ -61,7 +64,7 @@ export default function OrdersPage() {
       {orders && orders.length === 0 ? (
         <p className="text-gray-500">Bạn chưa có đơn hàng nào.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 pt-4 pb-6">
           {orders !== null && orders.map((order) => (
             <Link
               href={`/account/orders/${order._id}`}
@@ -70,13 +73,11 @@ export default function OrdersPage() {
             >
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-sm text-gray-500">Mã đơn hàng: <span className="font-medium">{order._id}</span></p>
-                  <p className="text-sm text-gray-500">Ngày đặt: {orderDate}</p>
+                  <p className="text-sm text-gray-500">Mã đơn hàng: <span className="font-medium">{order.orderNumber}</span></p>
+                  <p className="text-sm text-gray-500">Ngày đặt: {format(new Date(order.createdAt), "HH:mm 'ngày' dd/MM/yyyy")}</p>
+                  <p className={`text-sm ${statusColorMap[order.status]}`}>Trạng thái: {statusLabelMap[order.status]}</p>
                 </div>
                 <div className="text-right">
-                  <p className={`text-sm font-medium ${statusColorMap[order.status]}`}>
-                    {statusLabelMap[order.status]}
-                  </p>
                   <p className="text-base font-semibold text-gray-800">{order.totalAmount.toLocaleString()}₫</p>
                 </div>
               </div>

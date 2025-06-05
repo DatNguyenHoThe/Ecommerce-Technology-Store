@@ -6,63 +6,11 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { axiosClient } from '@/libs/axiosClient';
 import { env } from '@/libs/env.helper';
-
-
-interface IProduct {
-  _id: string;
-  product_name: string;
-}
-
-interface IProductVariant {
-  _id: string;
-  variantName: string;
-  price: number;
-  salePrice: number;
-  images: string[];
-  product: IProduct;
-}
-
-export interface IShippingAddress {
-  fullName: string;
-  gender: "male" | "female";
-  phone: string;
-  street: string;
-  ward: string;
-  district: string;
-  city: string;
-  country?: string;
-}
-
-interface IOrderItem {
-  _id: string,
-  productVariant: IProductVariant,
-  quantity: number,
-  currentPrice: number,
-  currentSalePrice: number,
-  totalAmount: number
-}
-
-export interface IOrder {
-  orderNumber: string;
-  products: IOrderItem[];
-  totalAmount: number;
-  shippingFee: number;
-  tax: number;
-  discount: number;
-  paymentMethod: string;
-  paymentStatus: string;
-  shippingAddress: IShippingAddress;
-  status: string;
-  notes: string;
-  user: string;
-}
+import { IOrder } from '@/app/types/types';
 
 export default function DoneComponent({resetCartStep}:{resetCartStep: ()=>void}) {
   const [order, setOrder] = useState<IOrder | null>(null);
   const {user} = useAuthStore();
-
-  
-  
 
   //fetch dữ liệu từ orders về
   const fetchOrders = async() => {
@@ -80,7 +28,7 @@ export default function DoneComponent({resetCartStep}:{resetCartStep: ()=>void})
   useEffect(() => {
     const getOrders = async() => {
       const data = await fetchOrders();
-      if(data) setOrder(data);
+      if(data) setOrder(data[0]);
     };
 
     getOrders();
@@ -106,7 +54,7 @@ export default function DoneComponent({resetCartStep}:{resetCartStep: ()=>void})
         </p>
 
         <div className="flex flex-col gap-3">
-          <Link href="/account/orders" onClick={resetCartStep}>
+          <Link href={`/account/orders/${order?._id}`} onClick={resetCartStep}>
             <span className="inline-block w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
               Xem đơn hàng của bạn
             </span>
