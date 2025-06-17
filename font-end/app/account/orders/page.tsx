@@ -53,8 +53,6 @@ export default function OrdersPage() {
   }},[user?._id, fetchOrders]);
   //console.log('orders===>', orders)
 
-  const orderDate = new Date().toLocaleDateString('vi-VN');
-
   return (
     <div className="w-[900px] min-h-[395px] max-h-full bg-white rounded-md shadow-md">
       <div className='flex justify-between px-6 pt-7 pb-6 border-b border-gray-300'>
