@@ -31,6 +31,9 @@ var compression = require('compression');
 var cors = require('cors');
 
 const app = express();
+
+app.set("trust proxy", true);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
