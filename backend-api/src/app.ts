@@ -25,6 +25,7 @@ import activityLogRoute from './routes/v1/activityLogs.route';
 import seoRoute from './routes/v1/seos.route';
 import techNewRoute from './routes/v1/techNews.route';
 import fogotPassword from './routes/v1/forgotPassword.route';
+import passwordsRoute from './routes/v1/passwords.route'
 
 
 var compression = require('compression');
@@ -76,6 +77,8 @@ app.use('/api/v1', activityLogRoute);
 app.use('/api/v1', seoRoute);
 app.use('/api/v1', techNewRoute);
 app.use('/api/v1', fogotPassword);
+app.use('/api/v1', passwordsRoute);
+
 
 
 //login and get profile route

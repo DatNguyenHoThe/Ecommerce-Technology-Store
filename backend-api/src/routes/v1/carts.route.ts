@@ -26,5 +26,7 @@ router.delete('/carts/:id', authenticateToken, validateSchemaYup(cartsValidation
 router.delete('/carts/user/:userId', authenticateToken, validateSchemaYup(cartsValidation.deleteByUserIdSchema), cartsController.deleteByUserId);
 //delete by itemId
 router.delete('/carts/user/:userId/item/:itemId', authenticateToken, validateSchemaYup(cartsValidation.deleteByItemIdSchema), cartsController.deleteByItemId);
+//delete many items
+router.delete("/carts/user/:userId/items", authenticateToken, validateSchemaYup(cartsValidation.deleteManyItems), cartsController.deleteManyItems);
 
 export default router;

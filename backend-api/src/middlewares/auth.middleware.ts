@@ -35,7 +35,7 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
       }
       //Đăng ký biến user global trong app
       res.locals.user = user;
-
+      req.user = { _id: user._id.toString() };
       next();
     } catch (err) {
       return next(createError(401, 'Forbidden'));

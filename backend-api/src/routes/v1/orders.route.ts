@@ -18,5 +18,7 @@ router.post('/orders', authenticateToken, validateSchemaYup(ordersValidation.cre
 router.put('/orders/:id', authenticateToken, validateSchemaYup(ordersValidation.updateByIdSchema), ordersController.updateById);
 //delete by id
 router.delete('/orders/:id', authenticateToken, validateSchemaYup(ordersValidation.deleteByIdSchema), ordersController.deleteById);
+//cancel by id
+router.patch("/orders/:id/cancel", authenticateToken, validateSchemaYup(ordersValidation.getByIdSchema), ordersController.cancelById);
 
 export default router;
