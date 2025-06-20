@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,7 +39,13 @@ export default function RootLayout({
         <Header />
         <main>
           {children}
-          <Toaster position="top-center" />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              className: "custom-toast",
+              duration: 2000,
+            }}
+          />
         </main>
         <Footer />
       </body>

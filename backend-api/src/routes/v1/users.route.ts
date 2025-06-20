@@ -3,6 +3,7 @@ import usersController from '../../controllers/users.controller';
 import validateSchemaYup from '../../middlewares/validate.middleware';
 import usersValidation from '../../validations/users.vadidation';
 import {authenticateToken} from '../../middlewares/auth.middleware';
+import { uploadImage } from '../../helpers/multer.helper';
 
 const router = express.Router();
 
@@ -27,5 +28,9 @@ router.put('/users/:id',authenticateToken, validateSchemaYup(usersValidation.upd
 //Delete user
 //DELETE /api/v1/users/:id
 router.delete('/users/:id',authenticateToken, usersController.Delete);
+
+
+// Update user avatar
+router.put('/users/:id/avatar/:collectionName', authenticateToken, uploadImage, usersController.uploadAvatar);
 
 export default router;

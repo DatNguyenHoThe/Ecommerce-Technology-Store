@@ -1,183 +1,211 @@
-import Order from '../models/order.model';
-import createError from 'http-errors';
-import User from '../models/users.model';
+import Order from "../models/order.model";
+import createError from "http-errors";
+import Coupon from "../models/coupon.model";
+// Get all orders with pagination, search, sort
+const getAll = async (query: any) => {
+  const {
+    page = 1,
+    limit = 10,
+    sort_by = "createdAt",
+    sort_type = "desc",
+    orderNumber,
+  } = query;
 
+  const sortObject: any = {
+    [sort_by]: sort_type === "desc" ? -1 : 1,
+  };
 
+  const where: any = {};
+  if (orderNumber?.length > 0) {
+    where.orderNumber = { $regex: orderNumber, $options: "i" };
+  }
 
-//Get all
-const getAll = async(query: any) => {
-    const {page = 1, limit = 10} = query;
-    let sortObject = {};
-    const sortType = query.sort_type || 'desc';
-    const sortBy = query.sort_by || 'createdAt';
-    sortObject = {...sortObject, [sortBy]: sortType === 'desc' ? -1 : 1};
-    
-    console.log('sortObject : ', sortObject);
+  const orders = await Order.find(where)
+    .populate("user")
+    .skip((page - 1) * limit)
+    .limit(Number(limit))
+    .sort(sortObject);
 
-    //tìm kiếm theo điều kiện
-    let where: any = {};
-    // nếu có tìm kiếm theo orderNumber
-    if(query.orderNumber && query.orderNumber.length > 0) {
-        where = {...where, orderNumber: {$regex: query.orderNumber, $options: 'i'}};
-    }
-    //nếu có tìm kiếm theo số điện thoại người nhận hàng
-    if(query["shippingInfor.phone"] && query["shippingInfor.phone"].length > 0) {
-        where = {...where, ["shippingInfor.phone"]: {$regex: query["shippingInfor.phone"], $options: 'i'}};
-    }
-    //nếu có tìm kiếm theo tên người nhận hàng
-    if(query["shippingInfor.recipientName"] && query["shippingInfor.recipientName"].length > 0) {
-        where = {...where, ["shippingInfor.recipientName"]: {$regex: query["shippingInfor.recipientName"], $options: 'i'}};
-    }
-    //nếu có tìm kiếm theo email user
-    if(query.email && query.email.length > 0) {
-        //tìm user theo email
-        const user = await User.findOne({email: { $regex: query.email, $options: "i"} });
-        if(user) {
-            where = {...where, user: user._id};
-            } else {
-            return {
-                products: [],
-                pagination: { totalRecord: 0, limit, page },
-            };
-        }
-    }
-    //nếu có tìm kiếm theo ngày tháng đặt hàng
-    let dateFilter: {$gte?: Date; $lte?: Date} = {};
+  const count = await Order.countDocuments(where);
 
-    if(query.startDate) {
-        const start = new Date(query.startDate);
-        start.setHours(0,0,0,0);
-        dateFilter.$gte = start;
-    }
+  return {
+    orders,
+    pagination: {
+      totalRecord: count,
+      limit: Number(limit),
+      page: Number(page),
+    },
+  };
+};
 
-    if(query.endDate) {
-        const end = new Date(query.endDate);
-        end.setHours(23,59,59,999);
-        dateFilter.$lte = end;
-    }
+// Get order by ID
+const getById = async (id: string) => {
+  const order = await Order.findById(id).populate("user");
+  if (!order) throw createError(404, "Order not found");
+  return order;
+};
 
-    if(Object.keys(dateFilter).length > 0) {
-        where = {...where, createdAt: dateFilter}
-    }
+// Get orders by userId
+const getByUserId = async (userId: string, query: any) => {
+  const {
+    page = 1,
+    limit = 10,
+    orderNumber,
+    status,
+    sort_by = "createdAt",
+    sort_type = "desc",
+  } = query;
 
+  const sortObject: any = {
+    [sort_by]: sort_type === "desc" ? -1 : 1,
+  };
 
-    const orders = await Order
-    .find(where)
-    .populate('user')
-    .skip((page-1)*limit)
-    .limit(limit)
-    .sort({...sortObject});
-    
-    //Đếm tổng số record hiện có của collection orders
-    const count = await Order.countDocuments(where);
+  const where: any = { user: userId };
 
-    return {
-        orders,
-        pagination: {
-            totalRecord: count,
-            limit,
-            page
-        }
-    };
-}
+  if (orderNumber?.length > 0) {
+    where.orderNumber = { $regex: orderNumber, $options: "i" };
+  }
 
-//get by ID
-const getById = async(id: string) => {
-    const order = await Order.findById(id);
-    if(!order) {
-        createError(404, 'order not found, please try again with other id');
-    }
-    return order;
-}
+  if (status && status !== "all") {
+    where.status = status;
+  }
 
-//get by userId
-const getByUserId = async(userId: string) => {
-    const order = await Order
-    .find({user: userId})
-    .populate('user')
-    .sort({createdAt: -1});
-    if(!order) {
-        createError(404, 'order not found, please try again with other userId');
-    }
-    return order;
-}
+  const orders = await Order.find(where)
+    .populate("user")
+    .skip((page - 1) * limit)
+    .limit(Number(limit))
+    .sort(sortObject);
 
+  const count = await Order.countDocuments(where);
 
-// Create
-const create = async(payload: any) => {
-    // kiểm tra xem orders có tồn tại không
-    const orderExist = await Order.findOne({orderNumber: payload.orderNumber});
-    if(orderExist) {
-        throw createError(404, "order already exists");
-    }
-    // Lọc bỏ các field rỗng ("") hoặc null/undefined
-    const cleanData = Object.fromEntries(
-        Object.entries(payload).filter(
-          ([_, value]) => value !== "" && value !== null && value !== undefined
-        )
+  return {
+    data: orders,
+    pagination: {
+      totalOrders: count,
+      page: Number(page),
+      limit: Number(limit),
+      totalPages: Math.ceil(count / limit),
+    },
+  };
+};
+
+// Create order
+const create = async (payload: any) => {
+  let orderNumber = `ORD-${Date.now()}`;
+  while (await Order.findOne({ orderNumber })) {
+    orderNumber = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  }
+
+  // Clean input
+  const cleanData = Object.fromEntries(
+    Object.entries(payload).filter(
+      ([_, value]) => value !== "" && value !== null && value !== undefined
     )
-    const order = new Order({
-        orderNumber: cleanData.orderNumber,
-        products: cleanData.products,
-        totalAmount: cleanData.totalAmount ? cleanData.totalAmount : 0,
-        shippingFee: cleanData.shippingFee ? cleanData.shippingFee : 0,
-        tax: cleanData.tax ? cleanData.tax : 0,
-        discount: cleanData.discount ? cleanData.discount : 0,
-        paymentMethod: cleanData.paymentMethod,
-        paymentStatus: cleanData.paymentStatus ? cleanData.status : "pending",
-        shippingAddress: cleanData.shippingAddress,
-        shippingInfor: cleanData.shippingInfor,
-        status: cleanData.status ? cleanData.status : "pending",
-        notes: cleanData.notes,
-        orderDate: cleanData.orderDate,
-        user: cleanData.user,
-    });
-    // lưu dữ liệu
-    await order.save();
-    return order; // trả về kết quả để truy xuất dữ liệu trong controller
-    
-}
-// update by ID
-const updateById = async(id: string, payload: any) => {
-    //kiểm tra xem id có tồn tại không
-    const order = await getById(id);
-    if(!order) {
-        throw createError(404, "order not found");
-    }
-    // kiểm tra xem orderNumber tồn tại không
-    const orderExist = await Order.findOne({
-        orderNumber: payload.orderNumber,
-        _id: { $ne: id }
-    });
-    if(orderExist) {
-        throw createError(404, "orderNumber already exists");
-    }
-    // trộn dữ liệu mới và cũ
-    Object.assign(order, payload);
-    /*lưu ý dữ liệu sau khi trộn chỉ lưu vào bộ nhớ Ram chứ chưa lưu vào database
-    --> cần lưu xuống database */
-    await order.save();
-    // trả kết quả
-    return order;
-}
-//Delete by id
-const deleteById = async(id: string) => {
-    //kiểm tra xem id có tồn tại không
-    const order = await getById(id);
-    if(!order) {
-        throw createError(404, "order not found");
-    }
-    //xóa order
-    await order.deleteOne({_id: order.id});
-    return order;
-}
+  );
+  // Loại bỏ invoice nếu rỗng
+  if (
+    !cleanData.invoice ||
+    Object.keys(cleanData.invoice).length === 0 ||
+    Object.values(cleanData.invoice).every((v) => v === "")
+  ) {
+    delete cleanData.invoice;
+  }
+  const order = new Order({
+    orderNumber,
+    orderDate: cleanData.orderDate || new Date(),
 
+    // Products
+    products: cleanData.products,
 
+    // Shipping
+    shippingAddress: cleanData.shippingAddress,
+    shippingInfo: cleanData.shippingInfo,
+    shippingMethod: cleanData.shippingMethod || "standard",
+    shippingFee: cleanData.shippingFee || 0,
+    trackingNumber: cleanData.trackingNumber,
+
+    // Payment
+    paymentMethod: cleanData.paymentMethod,
+    paymentStatus: cleanData.paymentStatus || "pending",
+    paidAt: cleanData.paidAt || null,
+
+    // Discount
+    discountCode: cleanData.discountCode || "",
+    discountAmount: cleanData.discountAmount || 0,
+
+    // Total
+    subTotal: cleanData.subTotal,
+    tax: cleanData.tax || 0,
+    totalAmount: cleanData.totalAmount,
+
+    // Status
+    status: cleanData.status || "pending",
+    notes: cleanData.notes || "",
+
+    // Invoice
+    invoice: cleanData.invoice,
+
+    // Reference
+    user: cleanData.user || null,
+  });
+
+  await order.save();
+  // Nếu có mã giảm giá thì tăng usageCount
+  if (order.discountCode) {
+    await Coupon.findOneAndUpdate(
+      { code: order.discountCode },
+      { $inc: { usageCount: 1 } }
+    );
+  }
+  return order;
+};
+
+// Update order
+const updateById = async (id: string, payload: any) => {
+  const order = await getById(id);
+  if (!order) throw createError(404, "Order not found");
+  if (payload.orderNumber) {
+    const existing = await Order.findOne({
+      orderNumber: payload.orderNumber,
+      _id: { $ne: id },
+    });
+    if (existing) throw createError(409, "Order number already exists");
+  }
+  Object.assign(order, payload);
+  await order.save();
+  return order;
+};
+
+// Delete order
+const deleteById = async (id: string) => {
+  const order = await getById(id);
+  if (!order) throw createError(404, "Order not found");
+
+  await order.deleteOne({ _id: id });
+  return order;
+};
+// Cancel order
+const cancelById = async (id: string) => {
+  const order = await getById(id);
+  if (!order) throw createError(404, "Order not found");
+
+  // Nếu đơn đã giao hoặc huỷ thì không được huỷ nữa
+  if (["canceled"].includes(order.status)) {
+    throw createError(400, "Không thể huỷ đơn hàng ở trạng thái hiện tại");
+  }
+
+  order.status = "canceled";
+  order.paymentStatus = "failed";
+  await order.save();
+
+  return order;
+};
 export default {
-    getAll,
-    getById,
-    getByUserId,
-    create,
-    updateById,
-    deleteById
-}
+  getAll,
+  getById,
+  getByUserId,
+  create,
+  updateById,
+  deleteById,
+  cancelById,
+};

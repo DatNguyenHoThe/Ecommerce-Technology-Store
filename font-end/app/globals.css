@@ -65,6 +65,36 @@ a {
 /* a:hover {
   text-decoration: underline !important;
 } */
+input:focus ~ label.linear-label,
+input:valid ~ label.linear-label {
+  background: linear-gradient(-180deg, #ececec 50%, #fff 0%) !important;
+}
+
+/* Giao diện toast cơ bản */
+[data-sonner-toast] {
+  @apply rounded-lg px-5 py-3 shadow-md border font-medium text-sm flex items-start gap-3 w-[420px] max-w-full;
+  font-family: 'Inter', sans-serif;
+}
+
+/* SUCCESS */
+[data-sonner-toast][data-sonner-type="success"] {
+  @apply bg-green-50 text-green-800 border-green-300;
+}
+
+/* ERROR */
+[data-sonner-toast][data-sonner-type="error"] {
+  @apply bg-red-50 text-red-800 border-red-300;
+}
+
+/* WARNING */
+[data-sonner-toast][data-sonner-type="warning"] {
+  @apply bg-yellow-50 text-yellow-800 border-yellow-300;
+}
+
+/* INFO */
+[data-sonner-toast][data-sonner-type="info"] {
+  @apply bg-blue-50 text-blue-800 border-blue-300;
+}
 
 :root {
   --radius: 0.625rem;

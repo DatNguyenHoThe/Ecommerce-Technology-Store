@@ -143,6 +143,28 @@ const deleteByUserIdSchema = yup
  })
  .required();
 
+// delete multiple items by userId
+const deleteManyItems = yup
+  .object({
+    params: yup.object({
+      userId: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: 'userId is non-ObjectID' })
+        .required(),
+    }),
+    body: yup.object({
+      itemIds: yup
+        .array()
+        .of(
+          yup
+            .string()
+            .matches(/^[0-9a-fA-F]{24}$/, { message: 'itemId is non-ObjectID' })
+        )
+        .min(1, 'At least one itemId is required')
+        .required(),
+    }),
+  })
+  .required();
 
 export default {
     getAllSchema,
@@ -154,5 +176,6 @@ export default {
     updateByUserIdSchema,
     deleteByIdSchema,
     deleteByUserIdSchema,
-    deleteByItemIdSchema
+    deleteByItemIdSchema,
+    deleteManyItems
 };

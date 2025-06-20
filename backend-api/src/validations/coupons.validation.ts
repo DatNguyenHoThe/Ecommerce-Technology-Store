@@ -5,13 +5,13 @@ import * as yup from 'yup';
 const getAllSchema = yup
   .object({
     query: yup.object({
-        page: yup.number().integer().positive().optional(),
-        limit: yup.number().integer().positive().optional(),
-        }),
-        sort_type: yup.string().oneOf(['asc', 'desc']).optional(),
-        sort_by: yup.string().oneOf(['createdAt', 'category_name']).optional(),
-        keyword: yup.string().min(2).max(50).optional(), // search category_name
-    })
+      page: yup.number().integer().positive().optional(),
+      limit: yup.number().integer().positive().optional(),
+      sort_type: yup.string().oneOf(['asc', 'desc']).optional(),
+      sort_by: yup.string().oneOf(['createdAt', 'category_name']).optional(),
+      keyword: yup.string().min(2).max(50).optional(),
+    }),
+  })
   .required();
 
   //get by id
@@ -83,11 +83,26 @@ const deleteByIdSchema = yup
 })
 .required();
 
+// check coupon
+const checkSchema = yup.object({
+  body: yup.object({
+    code: yup.string().required("Mã giảm giá là bắt buộc"),
+    items: yup.array().of(
+      yup.object({
+        productId: yup.string().required(),
+        price: yup.number().required(),
+        salePrice: yup.number().optional(),
+        quantity: yup.number().min(1).required(),
+      })
+    ).min(1, "Phải có ít nhất một sản phẩm để áp dụng mã giảm giá"),
+  }),
+}).required();
 
 export default {
     getAllSchema,
     getByIdSchema,
     createSchema,
     updateByIdSchema,
-    deleteByIdSchema
+    deleteByIdSchema,
+    checkSchema
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface StoreLocationProps {
   name: string;
@@ -31,21 +32,23 @@ export default function StoreLocation({
       <p className="text-gray-500">🕔 {hours}</p>
 
       <div className="w-full h-64 rounded-xl overflow-hidden shadow-sm relative">
-        <img
+        <Image
+          className="w-full h-auto"
           alt="Google Map"
           src={`https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=15&size=600x300&maptype=roadmap&markers=color:red|${latitude},${longitude}&key=${googleMapsApiKey}`}
           width={600}
           height={300}
           style={{ border: 0 }}
           loading="lazy"
-          className="w-full h-auto"
         />
       </div>
 
-      <Button onClick={openGoogleMaps} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg cursor-pointer">
+      <Button
+        onClick={openGoogleMaps}
+        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg cursor-pointer"
+      >
         <MapPin className="inline-block mr-2" /> Chỉ đường
       </Button>
     </div>
   );
 }
-

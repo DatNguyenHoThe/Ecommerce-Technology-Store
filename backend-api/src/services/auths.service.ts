@@ -1,4 +1,4 @@
-import User from '../models/users.model';
+import {User} from '../models/users.model';
 import createError from 'http-errors';
 import bcrypt from 'bcrypt';
 import {env} from '../helpers/env.helper';
@@ -14,7 +14,7 @@ const login = async({
     password: string
 }) => {
     //Kiểm tra nhân viên có tồn tại không ?
-    const user = await User.findOne({email});
+    const user = await User.findOne({email}).select("+password");
     if(!user) {
         throw createError(400, "email or password invalid");       
     }

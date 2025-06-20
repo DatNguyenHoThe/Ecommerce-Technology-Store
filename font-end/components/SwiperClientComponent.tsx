@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 interface ProductGalleryProps {
   images: string[];
@@ -47,10 +48,13 @@ export default function ProductGallery({
     <div className="product-gallery w-full">
       {/* Main image */}
       <div className="w-full h-[400px] bg-white flex items-center justify-center rounded-lg shadow mb-4 overflow-hidden">
-        <img
+        <Image
+          className="w-full h-full object-contain"
           src={images[activeIndex] || "/placeholder.svg"}
           alt={`${productName} - Hình ${activeIndex + 1}`}
-          className="w-full h-full object-contain"
+          width={600}
+          height={400}
+          loading="lazy"
         />
       </div>
 
@@ -85,10 +89,13 @@ export default function ProductGallery({
                 } rounded-md overflow-hidden`}
                 onClick={() => handleThumbnailClick(index)}
               >
-                <img
+                <Image
+                  className="w-full h-full object-cover"
                   src={image || "/placeholder.svg"}
                   alt={`Thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  width={80}
+                  height={80}
+                  loading="lazy"
                 />
               </div>
             ))}

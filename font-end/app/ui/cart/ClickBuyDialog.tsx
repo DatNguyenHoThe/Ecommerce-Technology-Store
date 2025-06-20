@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Dialog,
   DialogContent,
@@ -9,12 +7,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 interface ClickBuyDialogProps {
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    onAddToCart: () => void;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onAddToCart: () => void;
 }
 
 export default function ClickBuyDialog({
@@ -22,11 +19,8 @@ export default function ClickBuyDialog({
   setOpen,
   onAddToCart,
 }: ClickBuyDialogProps) {
-  const router = useRouter();
-
   const handleConfirm = () => {
     onAddToCart();
-    router.push(`/login`);
   };
 
   return (
@@ -35,7 +29,8 @@ export default function ClickBuyDialog({
         <DialogHeader>
           <DialogTitle>Đăng nhập để mua hàng?</DialogTitle>
           <DialogDescription>
-            Để tiếp tục mua hàng bạn phải đăng nhập. Bạn có muốn chuyển đến trang đăng nhập không ?
+            Để tiếp tục mua hàng bạn phải đăng nhập. Bạn có muốn chuyển đến
+            trang đăng nhập không?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -46,10 +41,11 @@ export default function ClickBuyDialog({
           >
             Cancel
           </Button>
-          <Button 
-          variant="destructive" 
-          className="cursor-pointer"
-          onClick={handleConfirm}>
+          <Button
+            variant="destructive"
+            className="cursor-pointer"
+            onClick={handleConfirm}
+          >
             Continue
           </Button>
         </DialogFooter>

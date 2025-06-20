@@ -2,7 +2,7 @@ import multer, { StorageEngine } from 'multer';
 import fs from 'fs';
 import path from 'path';
 import { Request } from 'express';
-interface CustomRequest extends Request {
+export interface CustomRequest extends Request {
     fileValidationError?: string;
 }
 
