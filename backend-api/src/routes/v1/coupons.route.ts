@@ -16,5 +16,7 @@ router.post('/coupons', authenticateToken, validateSchemaYup(couponsValidation.c
 router.put('/coupons/:id', authenticateToken, validateSchemaYup(couponsValidation.updateByIdSchema), couponsController.updateById);
 //delete by id
 router.delete('/coupons/:id', authenticateToken, validateSchemaYup(couponsValidation.deleteByIdSchema), couponsController.deleteById);
+//check coupon
+router.post('/coupons/check', authenticateToken, validateSchemaYup(couponsValidation.checkSchema), couponsController.checkCoupon);
 
 export default router;

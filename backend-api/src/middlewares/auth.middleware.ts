@@ -1,5 +1,5 @@
 import jwt, { JwtPayload }  from 'jsonwebtoken';
-import User from '../models/users.model';
+import {User} from '../models/users.model';
 import { Request, Response, NextFunction } from "express";
 import createError from 'http-errors';
 import { env } from '../helpers/env.helper';
@@ -35,7 +35,7 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
       }
       //Đăng ký biến user global trong app
       res.locals.user = user;
-
+      req.user = { _id: user._id.toString() };
       next();
     } catch (err) {
       return next(createError(401, 'Forbidden'));

@@ -108,6 +108,19 @@ const deleteByItemId = async(req: Request, res: Response, next: NextFunction) =>
     }
 }
 
+
+// Delete many items
+const deleteManyItems = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.params;
+    const { itemIds } = req.body;
+    const cart = await cartsService.deleteManyItems(userId, itemIds);
+    sendJsonSuccess(res, cart, httpStatus.OK.statusCode, httpStatus.OK.message);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
     getAll,
     getById,
@@ -118,5 +131,6 @@ export default {
     updateByUserId,
     deleteById,
     deleteByUserId,
-    deleteByItemId
+    deleteByItemId,
+    deleteManyItems
 }

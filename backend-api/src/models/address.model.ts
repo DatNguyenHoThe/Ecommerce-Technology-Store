@@ -29,12 +29,27 @@ const addressSchema = new Schema<IAddress>({
         maxLength: 255,
         require: true
     },
+    wardName: {
+        type: String,
+        maxLength: 255,
+        require: true
+    },
     district: {
         type: String,
         maxLength: 255,
         require: true
     },
+    districtName: {
+        type: String,
+        maxLength: 255,
+        require: true
+    },
     city: {
+        type: String,
+        maxLength: 100,
+        require: true
+    },
+    cityName: {
         type: String,
         maxLength: 100,
         require: true

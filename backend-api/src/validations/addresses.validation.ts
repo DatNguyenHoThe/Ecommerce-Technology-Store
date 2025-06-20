@@ -1,128 +1,126 @@
-import * as yup from 'yup';
-
+import * as yup from "yup";
 
 //get all
 const getAllSchema = yup
   .object({
     query: yup.object({
-        page: yup.number().integer().positive().optional(),
-        limit: yup.number().integer().positive().optional(),
-        }),
-        sort_type: yup.string().oneOf(['asc', 'desc']).optional(),
-        sort_by: yup.string().oneOf(['createdAt', 'category_name']).optional(),
-        keyword: yup.string().min(2).max(50).optional(), // search category_name
-    })
+      page: yup.number().integer().positive().optional(),
+      limit: yup.number().integer().positive().optional(),
+      sort_type: yup.string().oneOf(["asc", "desc"]).optional(),
+      sort_by: yup.string().oneOf(["createdAt", "category_name"]).optional(),
+      keyword: yup.string().min(2).max(50).optional(),
+    }),
+  })
   .required();
 
-  //get by id
-  const getByIdSchema = yup
+//get by id
+const getByIdSchema = yup
   .object({
     params: yup.object({
-      id: yup.string().matches(/^[0-9a-fA-F]{24}$/, {message: 'ID is non-ObjectID'}).required(),
+      id: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: "ID is non-ObjectID" })
+        .required(),
     }),
   })
-  .required();// khi truyền vào object phải tồn tại
+  .required(); // khi truyền vào object phải tồn tại
 
-  //get by userId
-  const getByUserIdSchema = yup
+//get by userId
+const getByUserIdSchema = yup
   .object({
     params: yup.object({
-      userId: yup.string().matches(/^[0-9a-fA-F]{24}$/, {message: 'ID is non-ObjectID'}).required(),
+      userId: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: "ID is non-ObjectID" })
+        .required(),
     }),
   })
-  .required();// khi truyền vào object phải tồn tại
+  .required(); // khi truyền vào object phải tồn tại
 
-  //create
+//create
 const createSchema = yup
   .object({
     body: yup.object({
-        type: yup.string().oneOf(["shipping", "billing"]).max(50).required(),
-        fullName: yup.string().max(100).required(),
-        phoneNumber: yup.string().max(20).required(),
-        street: yup.string().max(255).required(),
-        ward: yup.string().max(255).required(),
-        district: yup.string().max(255).required(),
-        city: yup.string().max(100).required(),
-        country: yup.string().max(20).required(),
-        isDefault: yup.boolean().required(),
-        user: yup.string().required()
+      type: yup.string().oneOf(["shipping", "billing"]).max(50).required(),
+      fullName: yup.string().max(100).required(),
+      phoneNumber: yup
+        .string()
+        .matches(/^\+?\d{9,15}$/, "Số điện thoại không hợp lệ")
+        .optional(),
+      street: yup.string().max(255).required(),
+      ward: yup.string().max(255).required(),
+      wardName: yup.string().max(255).required(),
+      district: yup.string().max(255).required(),
+      districtName: yup.string().max(255).required(),
+      city: yup.string().max(100).required(),
+      cityName: yup.string().max(255).required(),
+      country: yup.string().max(20).required(),
+      isDefault: yup.boolean().required(),
+      user: yup.string().required(),
     }),
   })
-  .required();// khi truyền vào object phải tồn tại
-
-
-
+  .required(); // khi truyền vào object phải tồn tại
 
 //update by id
 const updateByIdSchema = yup
   .object({
     params: yup.object({
-        id: yup.string().matches(/^[0-9a-fA-F]{24}$/, {message: 'ID is non-ObjectID'}).required(),
+      id: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: "ID is non-ObjectID" })
+        .required(),
     }),
     body: yup.object({
-        type: yup.string().oneOf(["shipping", "billing"]).max(50).optional(),
-        fullName: yup.string().max(100).optional(),
-        phoneNumber: yup.string().max(20).optional(),
-        street: yup.string().max(255).optional(),
-        ward: yup.string().max(255).optional(),
-        district: yup.string().max(255).optional(),
-        city: yup.string().max(100).optional(),
-        country: yup.string().max(20).optional(),
-        isDefault: yup.boolean().optional(),
-        user: yup.string().optional()
-    })
+      type: yup.string().oneOf(["shipping", "billing"]).max(50).optional(),
+      fullName: yup.string().max(100).optional(),
+      phoneNumber: yup
+        .string()
+        .matches(/^\+?\d{9,15}$/, "Số điện thoại không hợp lệ")
+        .optional(),
+      street: yup.string().max(255).optional(),
+      ward: yup.string().max(255).optional(),
+      wardName: yup.string().max(255).optional(),
+      district: yup.string().max(255).optional(),
+      districtName: yup.string().max(255).optional(),
+      city: yup.string().max(100).optional(),
+      cityName: yup.string().max(255).optional(),
+      country: yup.string().max(20).optional(),
+      isDefault: yup.boolean().optional(),
+      user: yup.string().optional(),
+    }),
   })
   .required();
 
-  //delete by id
+//delete by id
 const deleteByIdSchema = yup
-.object({
-  params: yup.object({
-      id: yup.string().matches(/^[0-9a-fA-F]{24}$/, {message: 'ID is non-ObjectID'}).required(),
-  }),
-  body: yup.object({
-    type: yup.string().oneOf(["shipping", "billing"]).max(50).optional(),
-        fullName: yup.string().max(100).optional(),
-        phoneNumber: yup.string().max(20).optional(),
-        street: yup.string().max(255).optional(),
-        ward: yup.string().max(255).optional(),
-        district: yup.string().max(255).optional(),
-        city: yup.string().max(100).optional(),
-        country: yup.string().max(20).optional(),
-        isDefault: yup.boolean().optional(),
-        user: yup.string().optional()
+  .object({
+    params: yup.object({
+      id: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: "ID is non-ObjectID" })
+        .required(),
+    }),
   })
-})
-.required();
+  .required();
 
 //update isDefault = true
 const updateAddressDefault = yup
-.object({
-  params: yup.object({
-      id: yup.string().matches(/^[0-9a-fA-F]{24}$/, {message: 'ID is non-ObjectID'}).required(),
-  }),
-  body: yup.object({
-    type: yup.string().oneOf(["shipping", "billing"]).max(50).optional(),
-        fullName: yup.string().max(100).optional(),
-        phoneNumber: yup.string().max(20).optional(),
-        street: yup.string().max(255).optional(),
-        ward: yup.string().max(255).optional(),
-        district: yup.string().max(255).optional(),
-        city: yup.string().max(100).optional(),
-        country: yup.string().max(20).optional(),
-        isDefault: yup.boolean().optional(),
-        user: yup.string().optional()
+  .object({
+    params: yup.object({
+      id: yup
+        .string()
+        .matches(/^[0-9a-fA-F]{24}$/, { message: "ID is non-ObjectID" })
+        .required(),
+    }),
   })
-})
-.required();
-
+  .required();
 
 export default {
-    getAllSchema,
-    getByIdSchema,
-    getByUserIdSchema,
-    createSchema,
-    updateByIdSchema,
-    deleteByIdSchema,
-    updateAddressDefault
+  getAllSchema,
+  getByIdSchema,
+  getByUserIdSchema,
+  createSchema,
+  updateByIdSchema,
+  deleteByIdSchema,
+  updateAddressDefault,
 };

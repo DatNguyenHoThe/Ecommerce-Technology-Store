@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useCartStore } from "@/stores/useCartStore";
 
 export default function LogoutConfirmDialog({
   children,
@@ -20,10 +21,15 @@ export default function LogoutConfirmDialog({
   onLogout: () => void;
 }) {
   const [open, setOpen] = useState(false);
-
-  const handleConfirm = () => {
-    onLogout();
-    setOpen(false);
+  const handleConfirm = async () => {
+    try {
+      onLogout();
+      await useCartStore.getState().clearCart();
+      await useCartStore.getState().setSource("local");
+      setOpen(false);
+    } catch (err) {
+      console.error("❌ Error during logout", err);
+    }
   };
 
   return (
@@ -45,10 +51,11 @@ export default function LogoutConfirmDialog({
           >
             Huỷ
           </Button>
-          <Button 
-          variant="destructive" 
-          className="cursor-pointer"
-          onClick={handleConfirm}>
+          <Button
+            variant="destructive"
+            className="cursor-pointer"
+            onClick={handleConfirm}
+          >
             Đăng xuất
           </Button>
         </DialogFooter>

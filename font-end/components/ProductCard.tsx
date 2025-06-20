@@ -3,6 +3,7 @@ import Link from "next/link";
 import type React from "react";
 
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 interface ProductCardProps {
   product: {
@@ -40,10 +41,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-200 h-full flex flex-col hover:border-none">
         {/* Product Image */}
         <div className="p-4 flex-grow flex items-center justify-center">
-          <img
+          <Image
+            className="w-full h-48 object-contain"
             src={product.images[0] || "/placeholder.svg"}
             alt={product.product_name}
-            className="w-full h-48 object-contain"
+            width={300}
+            height={192}
+            loading="lazy"
           />
         </div>
 
@@ -69,26 +73,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           {/* Pricing */}
           <div className="mt-auto">
-            {product.salePrice && product.salePrice < product.price ? (
-              <>
-              <div className="text-gray-500 line-through text-sm">
-                {originalPrice.toLocaleString()}đ
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-red-600 font-bold text-1xl">
-                  {product.salePrice.toLocaleString()}đ
-                </span>
-                <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded">
-                  -{discountPercent}%
-                </span>
-              </div>
-              </>
-            ) : (
+            <div className="text-gray-500 line-through text-sm">
+              {originalPrice.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </div>
+            <div className="flex items-center gap-2">
               <span className="text-red-600 font-bold text-1xl">
-                {product.price.toLocaleString()}đ
+                {product.salePrice.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
               </span>
-            )}
-            
+              <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded">
+                -{discountPercent}%
+              </span>
+            </div>
           </div>
           {/* Rating */}
           <div className="flex items-center mt-2 text-sm text-gray-600">

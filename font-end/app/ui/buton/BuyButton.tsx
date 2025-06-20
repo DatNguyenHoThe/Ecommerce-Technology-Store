@@ -1,52 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import ClickBuyDialog from "@/app/ui/cart/ClickBuyDialog";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useCartStore } from "@/stores/useCartStore";
-import { ICartItem } from "@/app/types/types";
+import { ICartItem, IProduct } from "@/app/types/types";
+import { toast } from "sonner";
 
 interface BuyButtonProps {
-  productId: string;
-  price: number;
-  salePrice: number;
+  product: IProduct;
 }
 
-export default function BuyButton({
-  productId,
-  price,
-  salePrice,
-}: BuyButtonProps) {
-  const [openDialog, setOpenDialog] = useState(false);
+export default function BuyButton({ product }: BuyButtonProps) {
   const { user } = useAuthStore();
-  const {carts, fetchCart, addToCart} = useCartStore();
-
-
-  //Fetch carts khi mà carts hoặc user thay đổi
-  useEffect(() => {
-    if(user?._id) {
-      fetchCart(user._id);
-    }
-  },[user?._id, fetchCart])
+  const { getCartItems, addItem, setSource } = useCartStore();
 
   const handleAddToCart = async () => {
-    if (!user) {
-      // Open dialog if not logged in
-      setOpenDialog(true);
-    } else {
-      //kiểm tra xem đã có sản phẩm đó trong giỏ hàng hay chưa
-      if (carts && carts.items.some((item: ICartItem) => productId === item.product._id)) {
-        alert(
-          "Sản phẩm này đã có trong giỏ hàng, bạn có thể kiểm tra giỏ hàng để biết thêm chi tiết"
-        );
-      } else {
-        //Không thì sẽ thêm sản phẩm vào giỏ hàng
-        const success = await addToCart(user._id, productId, price, salePrice)
-        if(success) {
-          alert("Bạn đã thêm vào giỏ hàng thành công")
-        }
-      }
+    const cartItems = getCartItems();
+
+    const alreadyInCart = cartItems.some(
+      (item: ICartItem) => item.product._id === product._id
+    );
+
+    if (alreadyInCart) {
+      toast.warning("Sản phẩm đã có trong giỏ hàng");
+      return;
+    }
+
+    const item: ICartItem = {
+      product,
+      quantity: 1,
+      currentPrice: product.price,
+      currentSalePrice: product.salePrice,
+      totalAmount: product.salePrice,
     };
+
+    try {
+      // ✅ Nếu chưa đăng nhập => dùng local cart
+      if (!user) {
+        await setSource("local");
+        await addItem(item);
+        toast.success("Đã thêm vào giỏ hàng thành công");
+        return;
+      }
+
+      // ✅ Nếu đã đăng nhập => chuyển sang server cart
+      await setSource("server", user._id);
+      await addItem(item);
+      toast.success("Đã thêm vào giỏ hàng thành công");
+    } catch (err) {
+      console.error("❌ Lỗi khi thêm vào giỏ hàng:", err);
+      toast.error("Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
+    }
   };
 
   return (
@@ -58,12 +61,6 @@ export default function BuyButton({
         <h1 className="text-[15px]">MUA NGAY</h1>
         <h2 className="text-[10px]">Giao tận nơi hoặc nhận tại cửa hàng</h2>
       </button>
-
-      <ClickBuyDialog
-        open={openDialog}
-        setOpen={setOpenDialog}
-        onAddToCart={handleAddToCart}
-      />
     </div>
   );
 }

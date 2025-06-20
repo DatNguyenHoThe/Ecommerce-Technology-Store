@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 interface ContentBlock {
   _id: string;
@@ -42,11 +43,14 @@ export default function CollapsibleContentBlock({
             );
           } else if (block.type === "image") {
             return (
-              <img
+              <Image
+                className="w-full h-auto rounded-md mb-6"
                 key={block._id}
                 src={block.src || "/placeholder.svg"}
                 alt={block.alt || "Product image"}
-                className="w-full h-auto rounded-md mb-6"
+                width={800}
+                height={600}
+                loading="lazy"
               />
             );
           }

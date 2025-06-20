@@ -10,5 +10,6 @@ export const env = {
     API_URL: process.env.NEXT_PUBLIC_API_URL,
     NODE_ENV: process.env.NODE_ENV || "development",
     MONGODB_URI: process.env.MONGODB_URI,
-    JWT_SECRET: process.env.JWT_SECRET
+    JWT_SECRET: process.env.JWT_SECRET,
+    URL: process.env.NEXT_PUBLIC_URL,
 }

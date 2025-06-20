@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type React from "react";
 
 import { useParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
-import { Filter, Home } from 'lucide-react';
+import { Filter, Home } from "lucide-react";
 import Link from "next/link";
 import { env } from "@/libs/env.helper";
 
@@ -58,13 +58,13 @@ export default function ProductPageByCategoryPage() {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [noProducts, setNoProducts] = useState<boolean>(false);
-  const fetchProducts = async () => {
+
+  const fetchProducts = useCallback(async () => {
     setIsLoading(true);
     setNoProducts(false);
 
     const decodedSlug = decodeURIComponent(slug);
 
-    // Ensuring minPrice and maxPrice are numbers
     const numericMinPrice = minPrice ? Number.parseFloat(minPrice) : null;
     const numericMaxPrice = maxPrice ? Number.parseFloat(maxPrice) : null;
 
@@ -85,7 +85,7 @@ export default function ProductPageByCategoryPage() {
     });
 
     const query = `${env.API_URL}/products?${queryParams.toString()}`;
-    console.log('query===>', query);
+    console.log("query ===>", query);
     try {
       const res = await fetch(query);
       if (!res.ok) throw new Error("Failed to fetch products");
@@ -99,21 +99,21 @@ export default function ProductPageByCategoryPage() {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  useEffect(() => {
-    if (slug) {
-      fetchProducts();
-    }
   }, [
     slug,
+    currentPage,
     minPrice,
     maxPrice,
     selectedBrand,
     minRating,
     sortOrder,
-    currentPage,
   ]);
+
+  useEffect(() => {
+    if (slug) {
+      fetchProducts();
+    }
+  }, [slug, fetchProducts]);
 
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
