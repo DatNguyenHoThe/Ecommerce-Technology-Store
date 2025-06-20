@@ -280,6 +280,7 @@ export const useCartStore = create<CartState>()(
       },
 
       syncLocalCartToServer: async (userId: string) => {
+<<<<<<< HEAD
         const { localItems } = get();
 
         if (!localItems.length) return;
@@ -298,11 +299,24 @@ export const useCartStore = create<CartState>()(
         const mergedItemsMap = new Map<string, ICartItem>();
 
         // Thêm sản phẩm server vào map
+=======
+        const { localItems, serverCart } = get();
+        if (!localItems.length) return;
+
+        const serverItems = serverCart?.items || [];
+        const mergedItemsMap = new Map<string, ICartItem>();
+
+        // 1. Thêm sản phẩm server vào map
+>>>>>>> Nhiem
         for (const item of serverItems) {
           mergedItemsMap.set(item.product._id, { ...item });
         }
 
+<<<<<<< HEAD
         // Merge local vào
+=======
+        // 2. Merge local vào
+>>>>>>> Nhiem
         for (const localItem of localItems) {
           const existing = mergedItemsMap.get(localItem.product._id);
           if (existing) {
@@ -315,6 +329,10 @@ export const useCartStore = create<CartState>()(
           }
         }
 
+<<<<<<< HEAD
+=======
+        // 3. Convert về array
+>>>>>>> Nhiem
         const mergedItems = Array.from(mergedItemsMap.values());
 
         const totalAmount = mergedItems.reduce(
@@ -322,7 +340,11 @@ export const useCartStore = create<CartState>()(
           0
         );
 
+<<<<<<< HEAD
         // Cập nhật server cart
+=======
+        // 4. Gửi toàn bộ merged lên server
+>>>>>>> Nhiem
         await axiosClient.put(`${env.API_URL}/carts/user/${userId}`, {
           items: mergedItems.map((i) => ({
             product: i.product._id,
@@ -334,8 +356,13 @@ export const useCartStore = create<CartState>()(
           totalAmount,
         });
 
+<<<<<<< HEAD
         set({ localItems: [] }); // clear local sau khi sync
         await get().fetchServerCart(userId); // cập nhật lại cart ở Zustand
+=======
+        set({ localItems: [] }); // clear local sau khi merge
+        await get().fetchServerCart(userId);
+>>>>>>> Nhiem
       },
 
       getCartItems: () => {
