@@ -61,6 +61,7 @@ export default function PaymentSection({
           total: (item.currentSalePrice ?? item.currentPrice) * item.quantity,
           image: encodeURI(item.product.images[0]),
           slug: item.product.slug,
+          promotion: item.product.promotion,
         })),
 
         shippingAddress: {
@@ -101,6 +102,7 @@ export default function PaymentSection({
           companyEmail: formData.invoice.companyEmail,
         },
       };
+      console.log("🛒 Order Data", orderData);
       const result = await createOrder(orderData);
 
       clearCart();

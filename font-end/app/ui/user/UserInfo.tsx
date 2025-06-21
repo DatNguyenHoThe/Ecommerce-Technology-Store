@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Hand, LogOut, UserRoundPen } from "lucide-react";
+import { Eye, Hand, LogOut, UserRoundPen } from "lucide-react";
 import IconHeader from "../IconHeader";
 import LogoutConfirmDialog from "../LogoutConfirmDialog";
 import { env } from "@/libs/env.helper";
@@ -18,11 +18,9 @@ import { env } from "@/libs/env.helper";
 export default function UserInfo() {
   const router = useRouter();
   //Profile Staff
-  const { user, clearTokens, clearUser } = useAuthStore();
+  const { user } = useAuthStore();
 
   const handleLogout = () => {
-    clearTokens();
-    clearUser();
     router.push("/");
   };
 
@@ -51,19 +49,13 @@ export default function UserInfo() {
         {/* Dropdown menu */}
         <DropdownMenu>
           <DropdownMenuTrigger className="cursor-pointer absolute object-fill w-full h-full" />
-          <DropdownMenuContent className="w-72 mr-32 rounded-none text-[18px]">
+          <DropdownMenuContent className="w-72 mt-3 mr-29 rounded-none text-[18px]">
             {/* Xin chào */}
-            <DropdownMenuItem className="p-2 h-10 font-bold cursor-pointer group hover:text-red-500">
+            <DropdownMenuItem className="p-2 h-10 font-bold group pointer-events-none">
               <span>
-                <Hand
-                  size={30}
-                  strokeWidth={3}
-                  className="text-black group-hover:text-red-500"
-                />
+                <Hand size={30} strokeWidth={3} className="text-black" />
               </span>
-              <p className="text-back group-hover:text-red-500">
-                Xin chào, {user?.fullName}
-              </p>
+              <p className="text-back">Xin chào, {user?.fullName}</p>
             </DropdownMenuItem>
             <hr className="border-1 border-gray-200" />
             {/* Đơn hàng của tôi */}
@@ -96,6 +88,22 @@ export default function UserInfo() {
               </span>
               <p className="text-back group-hover:text-red-500">
                 Cập nhật thông tin cá nhân
+              </p>
+            </DropdownMenuItem>
+            {/* Đã xem gần đây */}
+            <DropdownMenuItem
+              onClick={() => router.push("/account/viewed")}
+              className="p-2 h-10 font-bold cursor-pointer group hover:text-red-500"
+            >
+              <span>
+                <Eye
+                  size={30}
+                  strokeWidth={3}
+                  className="text-black group-hover:text-red-500"
+                />
+              </span>
+              <p className="text-back group-hover:text-red-500">
+                Đã xem gần đây
               </p>
             </DropdownMenuItem>
             {/* Đăng xuất */}

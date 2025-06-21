@@ -59,6 +59,7 @@ const createSchema = yup
             total: yup.number().min(0).required(),
             image: yup.string().url().required(),
             slug: yup.string().optional(),
+            promotion: yup.array().of(yup.string()).optional(),
           })
         )
         .required(),
@@ -151,6 +152,7 @@ const updateByIdSchema = yup
             total: yup.number().min(0).optional(),
             image: yup.string().url().optional(),
             slug: yup.string().optional(),
+            promotion: yup.array().of(yup.string()).optional(),
           })
         )
         .optional(),

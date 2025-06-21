@@ -1,28 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import MenuHeader from "./MenuHeader";
 import IconHeader from "./IconHeader";
 import Link from "next/link";
 import UserInfo from "./user/UserInfo";
 import { useRouter } from "next/navigation";
 import { buildSlug } from "@/libs/slugify.helper";
-import { useAuthStore } from "@/stores/useAuthStore";
 import { useCartStore } from "@/stores/useCartStore";
 
 export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { user } = useAuthStore();
-  const { itemQty, setSource } = useCartStore();
-
-  // Đặt source là "server" nếu đã đăng nhập
-  useEffect(() => {
-    if (user?._id) {
-      setSource("server", user._id);
-    }
-  }, [user?._id, setSource]);
+  const { itemQty } = useCartStore();
 
   // Xử lý tìm kiếm sản phẩm
   const handleSearch = () => {

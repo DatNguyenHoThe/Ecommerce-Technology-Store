@@ -148,6 +148,16 @@ export default function OrderDetailPage() {
                     <p className="font-medium group-hover:text-blue-600 transition-all">
                       {item.name}
                     </p>
+                    <div className="text-gray-500">
+                      <h4 className="text-sm font-semibold mb-1">
+                        Quà tặng khuyến mãi:
+                      </h4>
+                      <ul className="list-disc pl-5 text-xs text-[#6d6e72]">
+                        {item.promotion?.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </Link>
               </div>

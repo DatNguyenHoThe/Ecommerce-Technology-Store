@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import { Toaster } from "sonner";
+import AppInitSync from "./AppInitSync";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.className} antialiased`}
       >
+        <AppInitSync /> {/* đồng bộ userId */}
         <Header />
         <main>
           {children}

@@ -52,7 +52,7 @@ const getAll = async (query: any) => {
 const getById = async (id: string) => {
   const cart = await Cart.findById(id);
   if (!cart) {
-    createError(404, "cart not found, please try again with other id");
+    throw createError(404, "cart not found, please try again with other id");
   }
   return cart;
 };
@@ -61,10 +61,10 @@ const getById = async (id: string) => {
 const getByUserId = async (userId: string) => {
   const cart = await Cart.findOne({ user: userId }).populate({
     path: "items.product",
-    select: "product_name slug price salePrice images",
+    select: "product_name slug price salePrice images promotion",
   });
   if (!cart) {
-    createError(404, "cart not found, please try again with other userId");
+    throw createError(404, "cart not found, please try again with other userId");
   }
   return cart;
 };

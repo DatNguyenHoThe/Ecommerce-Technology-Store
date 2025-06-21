@@ -44,6 +44,11 @@ const orderSchema = new Schema<IOrder>(
           total: { type: Number, required: true },
           image: { type: String, required: true },
           slug: { type: String },
+          promotion: {
+            type: [String],
+            maxlength: 255,
+            default: [],
+          },
         },
       ],
       required: true,

@@ -5,7 +5,7 @@ export interface IProduct {
   price: number;
   salePrice: number;
   images: string[];
-  promotion?: string;
+  promotion?: string[];
 }
 
 export interface ICartItem {
@@ -15,6 +15,7 @@ export interface ICartItem {
   currentPrice: number;
   currentSalePrice: number;
   totalAmount: number;
+  promotion?: string[];
 }
 
 export interface ICart {
@@ -90,6 +91,7 @@ export interface IOrderItem {
   salePrice: number;
   quantity: number;
   total: number;
+  promotion?: string[];
 }
 
 export interface IOrder {

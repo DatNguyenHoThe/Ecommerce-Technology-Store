@@ -15,15 +15,13 @@ import Image from "next/image";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, setUser, clearTokens, clearUser } = useAuthStore();
+  const { user, setUser } = useAuthStore();
   const [avatarVersion, setAvatarVersion] = useState<number | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleAvatarClick = () => fileInputRef.current?.click();
 
   const handleLogout = () => {
-    clearTokens();
-    clearUser();
     router.push("/");
   };
 

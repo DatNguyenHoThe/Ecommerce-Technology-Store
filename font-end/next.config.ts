@@ -33,7 +33,13 @@ const nextConfig: NextConfig = {
         hostname: 'ecommerce-technology-store.onrender.com',
         port: '',
         pathname: '/uploads/**',
-      }
+      },
+      {
+  protocol: 'https', // <-- sửa tại đây
+  hostname: 'ecommerce-technology-store.onrender.com',
+  port: '',
+  pathname: '/uploads/**',
+}
     ],
   },
 };

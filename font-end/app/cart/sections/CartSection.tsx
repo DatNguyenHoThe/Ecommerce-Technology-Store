@@ -94,14 +94,15 @@ export default function CartSection({
                   </h4>
 
                   {item.product.promotion && (
-                    <div className="line-gift text-sm">
-                      <h3 className="font-bold">Quà tặng khuyến mãi</h3>
-                      <div className="flex relative">
-                        <span className="absolute top-2 left-2 w-1 h-1 bg-[#6D6E72] rounded-full"></span>
-                        <span className="text-[#6d6e72] pl-5">
-                          Tặng: <strong>{item.product.promotion}</strong>
-                        </span>
-                      </div>
+                    <div className="text-gray-500">
+                      <h4 className="text-sm font-semibold mb-1">
+                        Quà tặng khuyến mãi:
+                      </h4>
+                      <ul className="list-disc pl-5 text-xs text-[#6d6e72]">
+                        {item.product.promotion?.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
