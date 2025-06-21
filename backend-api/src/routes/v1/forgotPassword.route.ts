@@ -29,7 +29,7 @@ router.post('/forgot-password', async(req: Request, res: Response, next: NextFun
         }
         //Tạo mật khẩu mới
         const newPassword = generatePassword();
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        //const hashedPassword = await bcrypt.hash(newPassword, 10);
         //lưu mật khẩu vào database
         user.password = newPassword;
         await user.save();
